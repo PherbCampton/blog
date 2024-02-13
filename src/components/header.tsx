@@ -40,7 +40,7 @@ export const Header = () => {
     >
       <div
         className={`flex rounded-3xl justify-between items-center  ${
-          isActive ? "backdrop-blur" : ""
+          isActive ? "backdrop-blur-lg backdrop-brightness-90" : ""
         }`}
       >
         <div className="flex w-full items-center justify-between px-8 py-4 lg:p-10">

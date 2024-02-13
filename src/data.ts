@@ -5,11 +5,11 @@ export const nav = [
   },
   {
     title: "About",
-    path: "/",
+    path: "/about",
   },
   {
-    title: "Contact us",
-    path: "/",
+    title: "Contact Us",
+    path: "/contact",
   },
   {
     title: "Blogs",
