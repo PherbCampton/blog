@@ -14,7 +14,7 @@ export const SignUp = () => {
               <p className="mt-4 text-lg text-gel-gray text-opacity-40">
                 Join the league of the world's most outstanding minds today,
                 connect with intellects from around the globe and consume value
-                adding materials on <strong>Chatter</strong>...
+                adding contents on <strong>Chatter</strong>...
               </p>
             </div>
             <div>
