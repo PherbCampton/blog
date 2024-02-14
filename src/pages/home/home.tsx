@@ -1,9 +1,9 @@
+import { Tag } from "../../components/tag";
 import { Hero } from "../../utilities/hero";
+import { posts, tags, trending } from "../../data";
+import { TagCard } from "../../components/tag-card";
 import { Newsletter } from "../../components/newsletter";
 import { TrendingCard } from "../../components/trending-card";
-import { posts, tags, trending } from "../../data";
-import { Tag } from "../../components/tag";
-import { TagCard } from "../../components/tag-card";
 
 export const Home = () => {
   return (

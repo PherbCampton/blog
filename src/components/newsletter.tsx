@@ -4,9 +4,8 @@ export const Newsletter = () => {
       <div className="rounded-3xl bg-gel-black p-8">
         <div className="text-lg font-bold text-gel-gray-2">Get in touch</div>
         <div className="mb-8 mt-2 text-3xl font-bold md:text-2xl lg:text-3xl">
-          {" "}
           Building with Gelato means you are part of an active developer
-          community{" "}
+          community
         </div>
         <a
           href="https://discord.gg/ApbA39BKyJ"
@@ -38,8 +37,8 @@ export const Newsletter = () => {
             >
               <path
                 fill="currentColor"
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M6.784 1.333H2.31V.04h6.68v6.68H7.7V2.248L1.906 8.04.99 7.126l5.793-5.793Z"
               ></path>
             </svg>

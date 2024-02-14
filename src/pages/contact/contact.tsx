@@ -1,3 +1,8 @@
+import { Textarea } from "../../components/textarea";
+import { TextInput } from "../../components/text-input";
+import { PrimaryBtn } from "../../components/primary-btn";
+import { EmailInput } from "../../components/email-input";
+
 export const Contact = () => {
   return (
     <>
@@ -9,79 +14,20 @@ export const Contact = () => {
                 Talk to an expert
               </h1>
               <p className="mt-4 text-lg text-gel-gray text-opacity-40">
-                {" "}
                 If you have any questions, suggestions or wishes for our
-                products - write to us and we will help you{" "}
+                products - write to us and we will help you
               </p>
             </div>
             <div>
               <form noValidate={true} className="flex flex-col gap-4">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="ml-2 mb-2 block text-sm font-semibold"
-                  >
-                    Name
-                  </label>
-                  <div className="relative">
-                    <input
-                      id="name"
-                      className="pl-10 border-gel-background border px-6 py-4"
-                      name="name"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="ml-2 mb-2 block text-sm font-semibold"
-                  >
-                    Email
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="email"
-                      id="email"
-                      className="border-gel-background border px-6 py-4"
-                      name="email"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label
-                    htmlFor="description"
-                    className="ml-2 mb-2 block text-sm font-semibold"
-                  >
-                    Describe your concerns
-                  </label>
-                  <div className="relative">
-                    <textarea
-                      id="description"
-                      className="border-gel-background border px-6 py-4"
-                      rows={5}
-                      name="description"
-                    ></textarea>
-                  </div>
-                </div>
+                <TextInput name="name" label="Name" />
+                <EmailInput name="email" label="Email" />
+                <Textarea name="description" label="Describe your concerns" />
                 <div className="my-6 flex flex-col items-center gap-8 lg:flex-row">
-                  <button
-                    id="contact-send-button"
-                    className=" button button-action solid-primary w-full lg:w-auto lg:min-w-[200px] "
-                  >
-                    <span>
-                      <span className="button-action-icon text-primaryBackground ">
-                        &gt;
-                      </span>
-                      <span className="button-action-text text-primaryBackground">
-                        Reach out to us
-                      </span>
-                    </span>
-                  </button>
+                  <PrimaryBtn text="Reach out to us" />
                 </div>
               </form>
-              <div className="relative -right-8 mt-12">
-                {/* Image code here */}
-              </div>
+              <div className="relative -right-8 mt-12"></div>
             </div>
           </div>
         </div>

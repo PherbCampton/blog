@@ -20,26 +20,25 @@ export const About = () => {
         <section className="mt-10 text-center">
           <div className="gel-section-title mb-8">
             <h3>
-              We are the
-              <span className="gel-gradient-text-purple">
-                Gelato Collective
-              </span>
+              We are
+              <span className="gel-gradient-text-purple">{""} Chatter</span>
               ,<br />
-              We grow together.
+              Let’s publish together.
             </h3>
           </div>
           <div className="m-auto mb-12 max-w-[800px] text-xl opacity-70">
             <p className="mb-4">
-              A collective of individuals; thought leaders, builders, creators,
-              event organizers, misfits, rebels, ones who see things differently
-              and change the world.
+              At Chatter, we believe in the power of collective creativity,
+              where diverse perspectives converge to create a symphony of words.
+              Whether you're a seasoned wordsmith or just starting your writing
+              odyssey, our platform is your canvas. Let's publish together and
+              weave a tapestry of inspiration, one conversation at a time.
             </p>
             <p>
-              We are passionate about Gelato's mission to accelerate Web3
-              adoption and empower dApps to onboard the next billion users. In
-              our communities we are known for our expertise, ablility to
-              inspire, integrity and rentless drive to accelerate the Web3
-              adoption.
+              Join us, and let your voice be heard amidst the chorus of ideas.
+              Together, we'll illuminate the digital landscape with the
+              brilliance of our collective imagination. Welcome to Chatter –
+              where every word counts, and every story matters.
             </p>
           </div>
           <a
@@ -64,6 +63,7 @@ export const About = () => {
                 title={review.title}
                 review={review.review}
                 imageUrl={review.imageUrl}
+                designation={review.designation}
               />
             ))}
           </div>

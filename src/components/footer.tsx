@@ -49,8 +49,8 @@ export const Footer = () => {
                     >
                       <path
                         fill="currentColor"
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M6.784 1.333H2.31V.04h6.68v6.68H7.7V2.248L1.906 8.04.99 7.126l5.793-5.793Z"
                       ></path>
                     </svg>
@@ -70,8 +70,8 @@ export const Footer = () => {
                     >
                       <path
                         fill="currentColor"
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M6.784 1.333H2.31V.04h6.68v6.68H7.7V2.248L1.906 8.04.99 7.126l5.793-5.793Z"
                       ></path>
                     </svg>
@@ -100,8 +100,8 @@ export const Footer = () => {
                     >
                       <path
                         fill="currentColor"
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M6.784 1.333H2.31V.04h6.68v6.68H7.7V2.248L1.906 8.04.99 7.126l5.793-5.793Z"
                       ></path>
                     </svg>
@@ -125,8 +125,8 @@ export const Footer = () => {
                     >
                       <path
                         fill="currentColor"
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M6.784 1.333H2.31V.04h6.68v6.68H7.7V2.248L1.906 8.04.99 7.126l5.793-5.793Z"
                       ></path>
                     </svg>
@@ -150,8 +150,8 @@ export const Footer = () => {
                     >
                       <path
                         fill="currentColor"
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M6.784 1.333H2.31V.04h6.68v6.68H7.7V2.248L1.906 8.04.99 7.126l5.793-5.793Z"
                       ></path>
                     </svg>
@@ -202,8 +202,8 @@ export const Footer = () => {
                     >
                       <path
                         fill="currentColor"
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M6.784 1.333H2.31V.04h6.68v6.68H7.7V2.248L1.906 8.04.99 7.126l5.793-5.793Z"
                       ></path>
                     </svg>
@@ -252,8 +252,8 @@ export const Footer = () => {
                     >
                       <path
                         fill="currentColor"
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="m8.236 11.296.487-.47.067.046.104.075 1.265.93 2.157 1.582c.658.482 1.234.266 1.415-.524l.004-.02.818-3.836 1.391-6.523.07-.32c.076-.337.152-.675.181-1.016.06-.682-.434-1.02-1.07-.777-2.098.807-4.197 1.612-6.295 2.418L5.177 4.263l-1.082.414c-1.018.39-2.037.779-3.052 1.178-.248.098-.49.24-.695.41-.222.184-.187.438.055.6.144.089.3.158.462.206 1.084.342 2.17.68 3.256 1.01a.333.333 0 0 1 .254.25c.243.756.49 1.51.736 2.266.218.668.436 1.337.652 2.005.063.194.178.285.384.296.303.017.54-.097.751-.303.443-.434.889-.865 1.338-1.299Zm-2.02.549-.016.07H6.2a6.124 6.124 0 0 0-.034-.084c-.017-.039-.029-.068-.039-.097l-.285-.873c-.303-.927-.606-1.854-.915-2.778-.052-.156-.015-.224.116-.306l3.3-2.067c1.465-.919 2.931-1.838 4.399-2.755.133-.081.277-.142.428-.182.044-.012.098.01.152.032.024.01.049.02.072.026a.798.798 0 0 0-.024.068.314.314 0 0 1-.068.138c-.332.304-.668.605-1.004.906l-.467.42-1.277 1.146C9.252 6.676 7.95 7.844 6.646 9.008a.574.574 0 0 0-.2.419c-.052.633-.112 1.265-.171 1.897l-.04.433a.628.628 0 0 1-.018.088Z"
                       ></path>
                     </svg>

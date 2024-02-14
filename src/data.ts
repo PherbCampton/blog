@@ -154,26 +154,29 @@ export const posts = [
 
 export const reviews = [
   {
-    name: "Samuel Tuinperi",
-    title: "Seamless interactivity and an elegant UI",
+    name: "Bryan Monovie",
+    title: "Seamless interactivity",
+    designation: "CEO Monovie Agro Farms & Head of Strategic Ideas",
     review:
-      "Gelato’s Web3 Functions enable our smart contracts to become smarter by combining the power of automation and the ability to access external data. With Web3 Functions we can create more powerful products and also eliminate tedious operational tasks. - Weso, Lead Developer & Head of Strategic Partnerships at Beefy",
+      "Experience seamless interactivity like never before! From smooth transitions to intuitive user interfaces, this platform sets the standard for engaging online experiences. Whether it's effortlessly navigating through content or seamlessly interacting with multimedia elements, the fluidity of the user experience is unparalleled. Say goodbye to clunky interfaces and hello to a new era of seamless interactivity.",
     imageUrl:
       "https://media.cms.gelato.network/logo_Zed_Run_ada9ca8090/logo_Zed_Run_ada9ca8090.png",
   },
   {
-    name: "Samuel Tuinperi",
-    title: "Seamless interactivity and an elegant UI",
+    name: "Clinton Moses",
+    title: "Article publishing made easy",
+    designation: "CEO at Koka Tech",
     review:
-      "Gelato’s Web3 Functions enable our smart contracts to become smarter by combining the power of automation and the ability to access external data. With Web3 Functions we can create more powerful products and also eliminate tedious operational tasks. - Weso, Lead Developer & Head of Strategic Partnerships at Beefy",
+      "Publishing articles has never been simpler! With user-friendly tools and streamlined workflows, this platform redefines the ease of sharing your thoughts with the world. From drafting to publishing, every step is intuitive and hassle-free. With just a few clicks, your ideas are transformed into captivating articles, ready to inspire and inform. Say hello to a new era of effortless article publishing – where creating content is as easy as pie!",
     imageUrl:
       "https://media.cms.gelato.network/logo_Zed_Run_ada9ca8090/logo_Zed_Run_ada9ca8090.png",
   },
   {
-    name: "Samuel Tuinperi",
-    title: "Seamless interactivity and an elegant UI",
+    name: "Samuel Eneware",
+    title: "The best place to be heard",
+    designation: "Network Engineer at Main One",
     review:
-      "Gelato’s Web3 Functions enable our smart contracts to become smarter by combining the power of automation and the ability to access external data. With Web3 Functions we can create more powerful products and also eliminate tedious operational tasks. - Weso, Lead Developer & Head of Strategic Partnerships at Beefy",
+      "Where your voice truly matters. Here, your ideas aren't just published; they're celebrated. With a supportive community and cutting-edge platform, your words resonate louder than ever before. Whether you're sharing insights, sparking discussions, or igniting change, this is the ultimate destination for amplifying your voice. Join us and make yourself heard in the best possible way.",
     imageUrl:
       "https://media.cms.gelato.network/logo_Zed_Run_ada9ca8090/logo_Zed_Run_ada9ca8090.png",
   },
