@@ -63,9 +63,12 @@ export const Header = () => {
               ))}
             </div>
             <div className="hidden text-sm lg:flex items-center">
-              <div className="hover:opacity-75 font-medium lg:pl-5 lg:pr-5 cursor-pointer bg-primaryColor text-primaryBackground rounded-2xl py-1.5">
+              <Link
+                to="/sign-in"
+                className="hover:opacity-75 font-medium lg:pl-5 lg:pr-5 cursor-pointer bg-primaryColor text-primaryBackground rounded-2xl py-1.5"
+              >
                 Sign in
-              </div>
+              </Link>
             </div>
           </div>
         </div>

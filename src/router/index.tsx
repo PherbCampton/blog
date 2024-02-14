@@ -8,6 +8,9 @@ import {
 
 import { Home } from "../pages/home";
 import { Demo } from "../pages/demo";
+import { About } from "../pages/about";
+import { SignIn } from "../pages/sign-in";
+import { SignUp } from "../pages/sign-up";
 import { Contact } from "../pages/contact";
 import { Header } from "../components/header";
 import { Footer } from "../components/footer";
@@ -28,7 +31,10 @@ export const router = createBrowserRouter(
       >
         <Route path="/" element={<Home />} />
         <Route path="/demo" element={<Demo />} />
+        <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/sign-up" element={<SignUp />} />
 
         {/* <Route path="*" element={<NotFound />} /> */}
       </Route>
