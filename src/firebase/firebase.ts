@@ -5,7 +5,7 @@ import { getStorage } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  apiKey: "AIzaSyCxn70Y2mJfweQmnyc_thrkTJFFMx16eWM",
   authDomain: "blog-33fc2.firebaseapp.com",
   projectId: "blog-33fc2",
   storageBucket: "blog-33fc2.appspot.com",

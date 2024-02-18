@@ -11,9 +11,20 @@ export const nav = [
     title: "Contact Us",
     path: "/contact",
   },
+];
+
+export const profileNav = [
   {
-    title: "Blogs",
-    path: "/",
+    title: "Feeds",
+    path: "/feeds",
+  },
+  {
+    title: "About",
+    path: "/about",
+  },
+  {
+    title: "Contact Us",
+    path: "/contact",
   },
 ];
 
@@ -113,6 +124,27 @@ export const tags = [
   },
 ];
 
+export const userInterests = [
+  {
+    label: "AI",
+    value: "#7F81D0",
+  },
+  {
+    label: "Web Dev",
+    value: "#F09974",
+  },
+
+  {
+    label: "Mobile Dev",
+    value: "#5B69E2",
+  },
+
+  {
+    label: "Blockchain",
+    value: "#76B8F4",
+  },
+];
+
 export const posts = [
   {
     title: "Harvesting Yield Farming Vaults",
@@ -179,5 +211,97 @@ export const reviews = [
       "Where your voice truly matters. Here, your ideas aren't just published; they're celebrated. With a supportive community and cutting-edge platform, your words resonate louder than ever before. Whether you're sharing insights, sparking discussions, or igniting change, this is the ultimate destination for amplifying your voice. Join us and make yourself heard in the best possible way.",
     imageUrl:
       "https://media.cms.gelato.network/logo_Zed_Run_ada9ca8090/logo_Zed_Run_ada9ca8090.png",
+  },
+];
+
+export const userPosts = [
+  {
+    title: "Create Serverless Web3 Apps",
+    description:
+      "Decentralized infrastructure that provides secure and decentralized foundation for over 400+ Web3 Apps across DeFi, NFTs & Gaming.",
+  },
+  {
+    title: "Instant onchain executions with Block Triggers",
+    description:
+      "Block triggers enable Gelato Functions to actively listen for new blocks and automatically execute the smart contract function as soon as the block is mined.",
+  },
+  {
+    title: "Web3 Functions: Instant 1-Second Executions",
+    description:
+      "Gelato's Web3 Functions introduce parallel executions ushering in a new era of even lower latency, allowing for more frequent runs and increased throughput, which in turn reduces execution time to just 1 second.",
+  },
+  {
+    title: "One-Click DeFi: Gasless Swaps & Zaps",
+    description:
+      "While the potential of DeFi is vast, its widespread adoption has been hampered by a complex user experience. Users often grapple with intricate transactions, hidden yields, and multiple gas & network fees every step of the way.",
+  },
+  {
+    title: "Leveraging 15,000 per second throughput of Gelato Relay",
+    description:
+      "Discover how to build the CounterApp, where users can increment a value free from gas charges, and the GaslessNFTApp which offers hassle-free NFT creation without the burden of gas fees.",
+  },
+  {
+    title: "The Different Types of NFTs",
+    description:
+      "Dive into the fascinating world of NFTs, where digital ownership is being reshaped, and learn how Gelato’s innovative services are shaping the future in exciting new ways!",
+  },
+  {
+    title: "What is Blockchain Gaming?",
+    description:
+      "Explore the transformative world of blockchain gaming with Gelato's Web3 Functions. Experience ownership and decentralized control, along with real-world data integration and automated rewards.",
+  },
+];
+
+export const userFavorites = [
+  {
+    title: "Web3 Functions: Instant 1-Second Executions",
+    description:
+      "Gelato's Web3 Functions introduce parallel executions ushering in a new era of even lower latency, allowing for more frequent runs and increased throughput, which in turn reduces execution time to just 1 second.",
+  },
+  {
+    title: "One-Click DeFi: Gasless Swaps & Zaps",
+    description:
+      "While the potential of DeFi is vast, its widespread adoption has been hampered by a complex user experience. Users often grapple with intricate transactions, hidden yields, and multiple gas & network fees every step of the way.",
+  },
+  {
+    title: "The Different Types of NFTs",
+    description:
+      "Dive into the fascinating world of NFTs, where digital ownership is being reshaped, and learn how Gelato’s innovative services are shaping the future in exciting new ways!",
+  },
+  {
+    title: "What is Blockchain Gaming?",
+    description:
+      "Explore the transformative world of blockchain gaming with Gelato's Web3 Functions. Experience ownership and decentralized control, along with real-world data integration and automated rewards.",
+  },
+];
+
+export const profileColors = [
+  {
+    value: "#f5c3a6",
+    label: "Accent",
+  },
+  {
+    value: "#bde0e9",
+    label: "Whale",
+  },
+  {
+    value: "#baafae",
+    label: "Gray",
+  },
+  {
+    value: "#e1a492",
+    label: "Peach",
+  },
+  {
+    value: "#bc9fff",
+    label: "Purple",
+  },
+  {
+    value: "#784f94",
+    label: "Sprinkle",
+  },
+  {
+    value: "#3460a2",
+    label: "Dove",
   },
 ];

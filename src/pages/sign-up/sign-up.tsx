@@ -1,12 +1,67 @@
+import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
-import { TelInput } from "../../components/tel-input";
+import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Input } from "../../components/input";
+import { auth, db } from "../../firebase/firebase";
 import { LinkText } from "../../components/link-text";
-import { TextInput } from "../../components/text-input";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { PrimaryBtn } from "../../components/primary-btn";
-import { EmailInput } from "../../components/email-input";
-import { PasswordInput } from "../../components/password-input";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
+export type SignUpForm = {
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+  rePassword: string;
+};
 
 export const SignUp = () => {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [form, setForm] = useState<SignUpForm>({
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
+    rePassword: "",
+  });
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (Object.values(form).every((value) => value === "")) {
+      toast.error("All fields are required");
+    } else if (form.password !== form.rePassword) {
+      toast.error("Password doesn't match");
+    } else {
+      setIsLoading(true);
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        form.email,
+        form.password
+      );
+      const ref = doc(db, "users", user.uid);
+      const userDoc = await getDoc(ref);
+
+      if (!userDoc.exists()) {
+        await setDoc(ref, {
+          bio: "",
+          userImg: "",
+          userId: user.uid,
+          phone: form.phone,
+          email: form.email,
+          username: form.name,
+          password: form.password,
+        });
+      }
+      setIsLoading(false);
+      toast.success("Account created successfully");
+      navigate("/sign-in");
+    }
+  };
+
   return (
     <>
       <div className="container px-5">
@@ -23,19 +78,57 @@ export const SignUp = () => {
               </p>
             </div>
             <div>
-              <form noValidate={true} className="flex flex-col gap-4">
-                <TextInput name="name" label="Name" />
-                <TelInput name="telephone" label="Phone number" />
-                <EmailInput name="email" label="Email" />
-                <PasswordInput name="password" label="Password" />
-                <PasswordInput name="reenter" label="Re-enter Password" />
+              <form
+                onSubmit={handleSubmit}
+                noValidate={true}
+                className="flex flex-col gap-4"
+              >
+                <Input
+                  name="name"
+                  type="text"
+                  label="Name"
+                  setForm={setForm}
+                  value={form.name}
+                />
+                <Input
+                  type="tel"
+                  name="phone"
+                  setForm={setForm}
+                  value={form.phone}
+                  label="Phone number"
+                />
+                <Input
+                  type="email"
+                  name="email"
+                  label="Email"
+                  setForm={setForm}
+                  value={form.email}
+                />
+                <Input
+                  type="password"
+                  name="password"
+                  label="Password"
+                  setForm={setForm}
+                  value={form.password}
+                />
+                <Input
+                  type="password"
+                  setForm={setForm}
+                  name="rePassword"
+                  value={form.rePassword}
+                  label="Re-enter Password"
+                />
                 <p className="my-2 text-left text-sm text-gel-gray-2">
                   By signing up you agree to <strong>Chatter’s</strong> Terms of
                   Service and acknowledge that <strong>Chatter’s</strong>{" "}
                   Privacy Policy applies to you.
                 </p>
                 <div className="my-6 flex flex-col items-center gap-8 lg:flex-row">
-                  <PrimaryBtn text="Get me in" />
+                  <PrimaryBtn
+                    type="submit"
+                    text="Get me in"
+                    loading={isLoading}
+                  />
                   <button
                     id="contact-send-button"
                     className=" button solid-gradient outlined w-full md:w-auto "

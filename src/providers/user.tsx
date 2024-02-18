@@ -1,25 +1,65 @@
 import {
   Dispatch,
   useState,
+  useEffect,
   useContext,
   createContext,
   SetStateAction,
   PropsWithChildren,
 } from "react";
+import { auth, db } from "../firebase/firebase";
+import { Loading } from "../components/loader/loading";
+import { Profile } from "../components/profile-tab";
+import { collection, getDocs } from "firebase/firestore";
+import { User, onAuthStateChanged } from "firebase/auth";
 
 interface ContextType {
-  currentUser: boolean | null;
-  setCurrentUser: Dispatch<SetStateAction<boolean>>;
+  userLoading: boolean;
+  allUsers: Profile[];
+  currentUser: User | null;
+  setCurrentUser: Dispatch<SetStateAction<User | null>>;
 }
 
 const UserContext = createContext<ContextType | null>(null);
 
 export const UserProvider = ({ children }: PropsWithChildren) => {
-  const [currentUser, setCurrentUser] = useState(false);
+  const [currentUser, setCurrentUser] =
+    useState<ContextType["currentUser"]>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [userLoading, setUserLoading] = useState(true);
+  const [allUsers, setAllUsers] = useState<Profile[]>([]);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) setCurrentUser(user);
+      else setCurrentUser(null);
+      setIsLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, [currentUser]);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const querySnapshot = await getDocs(collection(db, "users"));
+      const usersData: Profile[] = querySnapshot.docs.map((doc) => ({
+        ...(doc.data() as Profile),
+        id: doc.id,
+      }));
+      setAllUsers(usersData);
+      setUserLoading(false);
+    };
+
+    getUsers();
+  }, []);
+
+  console.log(allUsers);
 
   return (
-    <UserContext.Provider value={{ currentUser, setCurrentUser }}>
-      {children}
+    <UserContext.Provider
+      value={{ allUsers, currentUser, userLoading, setCurrentUser }}
+    >
+      {isLoading ? <Loading /> : children}
     </UserContext.Provider>
   );
 };

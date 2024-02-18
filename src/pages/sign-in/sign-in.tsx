@@ -1,10 +1,78 @@
+import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
+import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Input } from "../../components/input";
 import { LinkText } from "../../components/link-text";
-import { EmailInput } from "../../components/email-input";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { PrimaryBtn } from "../../components/primary-btn";
-import { PasswordInput } from "../../components/password-input";
+import { auth, db, provider } from "../../firebase/firebase";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+
+export type SignInForm = {
+  email: string;
+  password: string;
+};
 
 export const SignIn = () => {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [form, setForm] = useState<SignInForm>({
+    email: "",
+    password: "",
+  });
+
+  const googleAuth = async () => {
+    try {
+      const createUser = await signInWithPopup(auth, provider);
+      const newUser = createUser.user;
+
+      const ref = doc(db, "users", newUser.uid);
+      const userDoc = await getDoc(ref);
+
+      if (!userDoc.exists()) {
+        await setDoc(ref, {
+          bio: "",
+          userId: newUser.uid,
+          email: newUser.email,
+          userImg: newUser.photoURL,
+          username: newUser.displayName,
+        });
+      }
+      toast.success("You are in");
+      navigate("/feeds");
+    } catch (error) {
+      toast.error(
+        (error as Error).message === "Firebase: Error (auth/internal-error)."
+          ? "Check your internet connection"
+          : (error as Error).message
+      );
+    }
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (Object.values(form).every((value) => value === "")) {
+      toast.error("All fields are required");
+    } else {
+      try {
+        setIsLoading(true);
+        await signInWithEmailAndPassword(auth, form.email, form.password);
+        navigate("/feeds");
+        setIsLoading(false);
+        toast.success("You are now in");
+      } catch (error) {
+        setIsLoading(false);
+        toast.error(
+          (error as Error).message ===
+            "Firebase: Error (auth/network-request-failed)."
+            ? "Check your internet connection"
+            : (error as Error).message
+        );
+      }
+    }
+  };
+
   return (
     <>
       <div className="container px-5">
@@ -21,12 +89,34 @@ export const SignIn = () => {
               </p>
             </div>
             <div>
-              <form noValidate={true} className="flex flex-col gap-4">
-                <EmailInput name="email" label="Email" />
-                <PasswordInput name="password" label="Password" />
+              <form
+                noValidate={true}
+                onSubmit={handleSubmit}
+                className="flex flex-col gap-4"
+              >
+                <Input
+                  type="email"
+                  name="email"
+                  label="Email"
+                  setForm={setForm}
+                  value={form.email}
+                />
+                <Input
+                  type="password"
+                  name="password"
+                  label="Password"
+                  setForm={setForm}
+                  value={form.password}
+                />
                 <div className="my-6 flex flex-col items-center gap-8 lg:flex-row">
-                  <PrimaryBtn text="Get me in" />
+                  <PrimaryBtn
+                    type="submit"
+                    text="Get me in"
+                    loading={isLoading}
+                  />
                   <button
+                    type="button"
+                    onClick={googleAuth}
                     id="contact-send-button"
                     className=" button solid-gradient outlined w-full md:w-auto "
                   >

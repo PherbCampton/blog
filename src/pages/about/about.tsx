@@ -1,8 +1,8 @@
 import { reviews } from "../../data";
 import { Hero } from "../../utilities/hero";
+import { Review } from "../../components/review";
 import { Feature } from "../../utilities/feature";
 import { Newsletter } from "../../components/newsletter";
-import { Review } from "../../components/review";
 
 export const About = () => {
   return (

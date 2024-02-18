@@ -1,18 +1,31 @@
 import { Profile } from "./profile-tab";
+import { SignUpForm } from "../pages/sign-up";
+import { SignInForm } from "../pages/sign-in";
 import { ContactForm } from "../pages/contact";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
 type Props = {
+  type: string;
   name: string;
-  label: string;
   value: string;
+  label: string;
+  disabled?: boolean;
   setForm:
     | Dispatch<SetStateAction<Profile>>
+    | Dispatch<SetStateAction<SignInForm>>
+    | Dispatch<SetStateAction<SignUpForm>>
     | Dispatch<SetStateAction<ContactForm>>;
 };
 
-export const Textarea = ({ label, name, value, setForm }: Props) => {
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+export const Input = ({
+  type,
+  name,
+  value,
+  label,
+  setForm,
+  disabled = false,
+}: Props) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setForm((prevForm: any) => ({
       ...prevForm,
@@ -26,15 +39,17 @@ export const Textarea = ({ label, name, value, setForm }: Props) => {
         {label}
       </label>
       <div className="relative">
-        <textarea
-          rows={5}
+        <input
           id={name}
           name={name}
+          type={type}
           value={value}
-          maxLength={300}
+          disabled={disabled}
           onChange={handleChange}
-          className="border-gel-background border px-6 py-4"
-        ></textarea>
+          className={`border-gel-background border px-6 py-4 ${
+            disabled ? "text-gel-gray cursor-not-allowed" : ""
+          }`}
+        />
       </div>
     </div>
   );

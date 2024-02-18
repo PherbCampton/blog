@@ -61,9 +61,9 @@ export const Hero = ({
             <path
               d="m2 5 6 6 6-6"
               stroke="#EFE0E0"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></path>
           </svg>
         </i>

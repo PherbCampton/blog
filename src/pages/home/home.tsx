@@ -46,7 +46,6 @@ export const Home = () => {
           <h3 className="gel-section-title mb-16 text-center">
             <span>Explore Chatter by tags</span>
           </h3>
-
           <div className="scrollbar-hide scrollbar-hide -mx-5 mb-8 overflow-x-scroll pl-5">
             <ul className="m-auto flex max-w-4xl gap-2 font-semibold uppercase lg:flex-wrap lg:justify-center">
               {tags.map((tag, i) => (

@@ -8,7 +8,7 @@ export const TagCard = ({ tag, title, imageUrl }: Props) => {
   return (
     <a
       href="/blog/nft-lending-management"
-      className="relative flex h-[261px] flex-col rounded-3xl bg-gel-black p-8 text-sm"
+      className="relative flex h-[261px] flex-col rounded-3xl bg-primaryBackground p-8 text-sm"
     >
       <div className="flex flex-1 flex-col">
         <i className="absolute right-5 flex w-5">
