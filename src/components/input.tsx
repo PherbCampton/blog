@@ -1,4 +1,5 @@
 import { Profile } from "./profile-tab";
+import { PostForm } from "../pages/publish";
 import { SignUpForm } from "../pages/sign-up";
 import { SignInForm } from "../pages/sign-in";
 import { ContactForm } from "../pages/contact";
@@ -12,6 +13,7 @@ type Props = {
   disabled?: boolean;
   setForm:
     | Dispatch<SetStateAction<Profile>>
+    | Dispatch<SetStateAction<PostForm>>
     | Dispatch<SetStateAction<SignInForm>>
     | Dispatch<SetStateAction<SignUpForm>>
     | Dispatch<SetStateAction<ContactForm>>;

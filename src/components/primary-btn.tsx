@@ -19,9 +19,9 @@ export const PrimaryBtn = ({ text, onClick, type, loading = false }: Props) => {
     >
       {!loading ? (
         <span>
-          <span className="button-action-icon text-primaryBackground ">
+          {/* <span className="button-action-icon text-primaryBackground ">
             &gt;
-          </span>
+          </span> */}
           <span className="button-action-text text-primaryBackground">
             {text}
           </span>

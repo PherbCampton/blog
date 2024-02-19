@@ -205,9 +205,11 @@ export const ProfileTab = ({ handleProfileTheme, getUserData }: Props) => {
       />
       <Textarea name="bio" label="Bio" value={form.bio} setForm={setForm} />
       <SingleSelect
+        label="Theme"
         options={profileColors}
         selectedOption={form.theme}
         onChange={handleSingleSelectChange}
+        help="Select your profile accent color"
       />
       <div className="my-6 flex flex-col items-center gap-8 lg:flex-row">
         <PrimaryBtn type="submit" loading={isLoading} text="Update Profile" />

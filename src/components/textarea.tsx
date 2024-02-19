@@ -1,4 +1,5 @@
 import { Profile } from "./profile-tab";
+import { PostForm } from "../pages/publish";
 import { ContactForm } from "../pages/contact";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
@@ -8,6 +9,7 @@ type Props = {
   value: string;
   setForm:
     | Dispatch<SetStateAction<Profile>>
+    | Dispatch<SetStateAction<PostForm>>
     | Dispatch<SetStateAction<ContactForm>>;
 };
 

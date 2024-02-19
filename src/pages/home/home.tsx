@@ -58,8 +58,8 @@ export const Home = () => {
             {posts.map((post, i) => (
               <TagCard
                 key={i}
-                title={post.title}
                 tag={post.tag}
+                title={post.title}
                 imageUrl={post.imageUrl}
               />
             ))}

@@ -12,7 +12,7 @@ function SmoothScroll({ children }: SmoothScrollProps) {
   const navType: NavigationType = "POP";
 
   useEffect(() => {
-    if (navType !== "POP") {
+    if (navType == "POP") {
       window.scrollTo({
         top: 0,
         behavior: "smooth",

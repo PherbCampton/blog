@@ -5,6 +5,7 @@ import { Slide } from "react-toastify";
 import { SignIn } from "./pages/sign-in";
 import { SignUp } from "./pages/sign-up";
 import { Profile } from "./pages/profile";
+import { Publish } from "./pages/publish";
 import { Contact } from "./pages/contact";
 import { useUser } from "./providers/user";
 import { Footer } from "./components/footer";
@@ -25,19 +26,20 @@ export default function App() {
       {currentUser ? <ProfileHeader /> : <Header />}
       <SmoothScroll>
         <Routes>
-          {currentUser && <Route path="/" element={<Home />} />}
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          {!currentUser && <Route path="/" element={<Home />} />}
           {currentUser && <Route path="/feeds" element={<Feeds />} />}
+          {!currentUser && <Route path="/sign-in" element={<SignIn />} />}
+          {!currentUser && <Route path="/sign-up" element={<SignUp />} />}
+          {currentUser && <Route path="/publish" element={<Publish />} />}
+          {currentUser && (
+            <Route path="/profile/:userId" element={<Profile />} />
+          )}
           <Route
             path="*"
             element={<Navigate to={currentUser ? "/feeds" : "/"} />}
           />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          {!currentUser && <Route path="/sign-in" element={<SignIn />} />}
-          {!currentUser && <Route path="/sign-up" element={<SignUp />} />}
-          {currentUser && (
-            <Route path="/profile/:userId" element={<Profile />} />
-          )}
         </Routes>
       </SmoothScroll>
       <Footer />

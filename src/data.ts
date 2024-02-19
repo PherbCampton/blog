@@ -305,3 +305,94 @@ export const profileColors = [
     label: "Dove",
   },
 ];
+
+export const mkdStr = `
+# Getting Started with Markdown
+
+Markdown is a lightweight markup language with plain-text formatting syntax. It allows you to write using an easy-to-read, easy-to-write plain text format that gets converted into structurally valid HTML.
+
+## Headers
+
+You can create headers by using one to six hash (#) symbols at the beginning of a line. The number of hash symbols determines the level of the header.
+
+\`\`\`markdown
+# Header 1
+## Header 2
+### Header 3
+#### Header 4
+##### Header 5
+###### Header 6
+\`\`\`
+
+## Emphasis
+
+You can emphasize text using asterisks (*) or underscores (_).
+
+\`\`\`markdown
+*italic* or _italic_
+**bold** or __bold__
+\`\`\`
+
+## Lists
+
+You can create ordered and unordered lists.
+
+\`\`\`markdown
+- Unordered Item 1
+- Unordered Item 2
+- Unordered Item 3
+
+1. Ordered Item 1
+2. Ordered Item 2
+3. Ordered Item 3
+\`\`\`
+
+## Links
+
+You can create links using square brackets for the link text and parentheses for the URL.
+
+\`\`\`markdown
+[Link Text](https://example.com)
+\`\`\`
+
+## Images
+
+You can insert images using an exclamation mark (!), followed by square brackets for the alt text, and parentheses for the image URL.
+
+\`\`\`markdown
+![Alt Text](https://example.com/image.jpg)
+\`\`\`
+
+## Code Blocks
+
+You can display code blocks using backticks (\`) for inline code and triple backticks (\`\`\`) for blocks of code.
+
+Inline code: \`console.log('Hello, world!')\`
+
+\`\`\`javascript
+function greet(name) {
+  console.log('Hello, ' + name + '!');
+}
+\`\`\`
+
+## Blockquotes
+
+You can create blockquotes using the greater than (>) symbol.
+
+\`\`\`markdown
+> This is a blockquote.
+\`\`\`
+
+## Horizontal Rule
+
+You can create a horizontal rule using three or more hyphens (-), asterisks (*), or underscores (_).
+
+\`\`\`markdown
+---
+\`\`\`
+
+## Conclusion
+
+This is just a basic overview of Markdown syntax. There's a lot more you can do with Markdown, including tables, task lists, and more advanced formatting. Experiment with different elements and have fun writing in Markdown!
+
+`;

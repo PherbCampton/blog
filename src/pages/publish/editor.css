@@ -1,0 +1,35 @@
+.w-md-editor {
+  @apply !rounded-3xl;
+  background-color: #191919 !important;
+  font-family: Inter, sans-serif !important;
+}
+
+.w-md-editor-toolbar {
+  background-color: #191919 !important;
+  @apply !p-4 !border-b !rounded-t-3xl;
+}
+
+.w-md-editor-content {
+  @apply !px-4;
+  resize: none !important;
+}
+
+.wmde-markdown-color {
+  background-color: #191919 !important;
+}
+
+.w-md-editor-text-input {
+  @apply !border-none rounded-none;
+  font-family: Inter, sans-serif !important;
+  resize: none !important;
+}
+
+.w-md-editor-text-input:focus {
+  @apply !border-none !rounded-none !outline-none;
+  font-family: Inter, sans-serif !important;
+  resize: none !important;
+}
+
+.code-highlight {
+  background-color: #202020 !important;
+}

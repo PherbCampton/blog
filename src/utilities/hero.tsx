@@ -60,8 +60,8 @@ export const Hero = ({
           >
             <path
               d="m2 5 6 6 6-6"
-              stroke="#EFE0E0"
               strokeWidth="2"
+              stroke="#EFE0E0"
               strokeLinecap="round"
               strokeLinejoin="round"
             ></path>

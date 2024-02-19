@@ -1,13 +1,12 @@
 // import { profileNav } from "../data";
-import { Link } from "react-router-dom";
 import logo from "../assets/chatter.svg";
 import { FiSearch } from "react-icons/fi";
 import { FaRegStar } from "react-icons/fa";
 import { Loading } from "./loader/loading";
-8;
 import { useEffect, useState } from "react";
 import { useUser } from "../providers/user";
 import { DropdownItem } from "./dropdown-item";
+import { Link, useLocation } from "react-router-dom";
 import { CgProfile, CgLogOut } from "react-icons/cg";
 import defaultAvatar from "../assets/default-avatar.jpg";
 import { IoMdNotificationsOutline, IoIosNotifications } from "react-icons/io";
@@ -15,6 +14,7 @@ import { IoMdNotificationsOutline, IoIosNotifications } from "react-icons/io";
 
 export const ProfileHeader = () => {
   const notification = 0;
+  const { pathname } = useLocation();
   const [visible, setVisible] = useState(true);
   const [isActive, setIsActive] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
@@ -74,6 +74,14 @@ export const ProfileHeader = () => {
               >
                 <FiSearch fontSize={"20px"} />
               </Link>
+              {pathname !== "/publish" && (
+                <Link
+                  to="/publish"
+                  className="hover:opacity-75 font-medium flex items-center gap-2 lg:pl-5 lg:pr-5 cursor-pointer text-primaryColor rounded-full py-1.5 border border-1 mr-5"
+                >
+                  <p className="text-sm">Write</p>
+                </Link>
+              )}
             </div>
             <div className="group/parent hidden text-sm lg:flex items-center">
               <div className="py-[20px] hover:opacity-75 font-medium lg:pr-2 cursor-pointer  text-primaryBackground rounded-2xl">
