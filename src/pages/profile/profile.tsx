@@ -1,9 +1,10 @@
+import { userPosts } from "../../data";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useUser } from "../../providers/user";
+import { useFetch } from "../../hooks/useFetch";
 import { Tabs, Tab } from "../../components/tabs";
 import { Interest } from "../../components/interest";
-import { userPosts, userFavorites } from "../../data";
 import { FeedsCard } from "../../components/feeds-card";
 import { ProfileTab } from "../../components/profile-tab";
 import defaultAvatar from "../../assets/default-avatar.jpg";
@@ -12,6 +13,7 @@ import { DashboardCard } from "../../components/dashboard-card";
 export const Profile = () => {
   const { allUsers } = useUser();
   const { userId } = useParams();
+  const { isLoading, data } = useFetch("posts");
   // const { currentUser } = useUser();
 
   const getUserData = allUsers.find((user) => user.userId === userId);
@@ -50,12 +52,8 @@ export const Profile = () => {
       color: theme,
       content: (
         <div className="mt-10 flex flex-col gap-10">
-          {userFavorites.map((post, i) => (
-            <FeedsCard
-              key={i}
-              title={post.title}
-              description={post.description}
-            />
+          {data.map((post, i) => (
+            <FeedsCard key={i} post={post} />
           ))}
         </div>
       ),

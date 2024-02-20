@@ -1,4 +1,4 @@
-import { GiSelfLove } from "react-icons/gi";
+import { TiMediaRecordOutline } from "react-icons/ti";
 
 type Props = {
   interest: string;
@@ -8,7 +8,10 @@ export const Interest = ({ interest, theme }: Props) => {
   return (
     <li className="flex items-center gap-2 text-sm text-gel-gray-2">
       <i style={{ color: "red" }}>
-        <GiSelfLove fontSize={"24px"} style={{ fill: theme, opacity: "0.5" }} />
+        <TiMediaRecordOutline
+          fontSize={"24px"}
+          style={{ fill: theme, opacity: "0.5" }}
+        />
       </i>
       <p
         aria-current="page"

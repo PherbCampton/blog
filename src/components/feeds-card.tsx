@@ -1,9 +1,19 @@
+import { Spinner } from "./spinner";
+import { PostType } from "./tag-card";
+import { useFetch } from "../hooks/useFetch";
+import { useTimeAgo } from "../hooks/useTimeAgo";
+
 type Props = {
-  title: string;
-  description: string;
+  post: PostType;
 };
 
-export const FeedsCard = ({ title, description }: Props) => {
+export const FeedsCard = ({ post }: Props) => {
+  const { data, isLoading } = useFetch("users");
+  const { title, tag, userId, description, createdAt } = post;
+  const getUserData = data && data?.find((user) => user?.userId === userId);
+
+  const timeAgo = useTimeAgo(createdAt);
+
   return (
     <div className="col-span-2 h-full w-full items-start justify-end overflow-hidden rounded-3xl p-10">
       <div className="relative">
@@ -12,28 +22,32 @@ export const FeedsCard = ({ title, description }: Props) => {
           <div className="flex justify-between items-center mb-3 px-2">
             <div className="use-case-projects flex items-center transition-all delay-100 duration-200 group-hover:translate-y-5 group-hover:scale-105 group-hover:opacity-0">
               <figure className="-ml-[14px] flex max-h-[46px] max-w-[46px] items-center overflow-hidden rounded-full border-[3px] border-gel-black text-black">
-                <picture>
-                  <source
-                    type="image/webp"
-                    sizes="40px"
-                    srcSet={`https://media.cms.gelato.network/logo_Zed_Run_ada9ca8090/logo_Zed_Run_ada9ca8090.png 40w`}
-                  />
-                  <img
-                    width="40"
-                    height="40"
-                    alt="ZedRun"
-                    loading="lazy"
-                    className="h-full w-full"
-                    src='"https://media.cms.gelato.network/logo_Zed_Run_ada9ca8090/logo_Zed_Run_ada9ca8090.png'
-                    sizes="40px"
-                    srcSet={`https://media.cms.gelato.network/logo_Zed_Run_ada9ca8090/logo_Zed_Run_ada9ca8090.png 40w`}
-                  />
-                </picture>
+                {isLoading ? (
+                  <Spinner size="40" />
+                ) : (
+                  <picture>
+                    <source
+                      type="image/webp"
+                      sizes="40px"
+                      srcSet={`${getUserData?.userImg} 40w`}
+                    />
+                    <img
+                      width="40"
+                      height="40"
+                      alt="ZedRun"
+                      loading="lazy"
+                      className="h-full w-full"
+                      src={getUserData?.userImg}
+                      sizes="40px"
+                      srcSet={`${getUserData?.userImg} 40w`}
+                    />
+                  </picture>
+                )}
               </figure>
-              <p className="text-lg font-bold ml-2">Samuel Tuinperi</p>
+              <p className="text-lg font-bold ml-2">{getUserData?.username}</p>
             </div>
             <div className="font-semibold text-gel-gray transition-all duration-200 group-hover:-translate-y-5 group-hover:scale-105 group-hover:opacity-0 mb-3">
-              <span className="text-gel-gray text-sm">{"Gaming"}</span>
+              <span className="text-gel-gray text-sm">{tag.label}</span>
             </div>
           </div>
 
@@ -41,7 +55,7 @@ export const FeedsCard = ({ title, description }: Props) => {
           <p className="pb-6 text-lg text-gel-gray">
             {description}
             <span className="block text-xs font-semibold uppercase text-gel-peach pt-2 opacity-70">
-              3 days ago
+              {timeAgo}
             </span>
           </p>
 

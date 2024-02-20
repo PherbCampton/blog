@@ -49,11 +49,13 @@ export const SignUp = () => {
         await setDoc(ref, {
           bio: "",
           userImg: "",
+          interests: [],
           userId: user.uid,
           phone: form.phone,
           email: form.email,
           username: form.name,
           password: form.password,
+          theme: { value: "#fffff", label: "Default" },
         });
       }
       setIsLoading(false);

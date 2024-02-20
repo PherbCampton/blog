@@ -73,7 +73,7 @@ export const ProfileTab = ({ handleProfileTheme, getUserData }: Props) => {
   const handleSingleSelectChange = (selectedValues: Profile["theme"]) => {
     setForm((prevForm: Profile) => ({
       ...prevForm,
-      accentColor: selectedValues,
+      theme: selectedValues,
     }));
   };
 

@@ -1,23 +1,23 @@
 import { v4 as uuid } from "uuid";
 import { toast } from "react-toastify";
 import { Input } from "../../components/input";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../../providers/user";
 import { mkdStr, userInterests } from "../../data";
 import { FormEvent, useRef, useState } from "react";
 import { Textarea } from "../../components/textarea";
+import { db, storage } from "../../firebase/firebase";
+import { addDoc, collection } from "firebase/firestore";
 import { PrimaryBtn } from "../../components/primary-btn";
-import { useNavigate } from "react-router-dom";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 import "./editor.css";
 import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
-import defaultImage from "../../assets/default-post-img.png";
 
 import MDEditor from "@uiw/react-md-editor";
+import defaultImage from "../../assets/default-post-img.png";
 import SingleSelect, { OptionType } from "../../components/single-select";
-import { addDoc, collection } from "firebase/firestore";
-import { db, storage } from "../../firebase/firebase";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { useUser } from "../../providers/user";
 
 export type PostForm = {
   title: string;
@@ -214,6 +214,7 @@ export const Publish = () => {
           </div>
           <div className="my-6 flex flex-col items-center justify-center gap-8 lg:flex-row">
             <button
+              type="button"
               onClick={handlePreview}
               className={`group button solid-gradient gradient-white outlined w-full md:w-auto`}
             >

@@ -1,11 +1,14 @@
 import { Tag } from "../../components/tag";
 import { Hero } from "../../utilities/hero";
-import { posts, tags, trending } from "../../data";
+import { tags, trending } from "../../data";
+import { useFetch } from "../../hooks/useFetch";
+import { Spinner } from "../../components/spinner";
 import { TagCard } from "../../components/tag-card";
 import { Newsletter } from "../../components/newsletter";
 import { TrendingCard } from "../../components/trending-card";
 
 export const Home = () => {
+  const { isLoading, data } = useFetch("posts");
   return (
     <>
       <div className="container px-5">
@@ -55,14 +58,13 @@ export const Home = () => {
             </ul>
           </div>
           <div className="use-cases-list grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {posts.map((post, i) => (
-              <TagCard
-                key={i}
-                tag={post.tag}
-                title={post.title}
-                imageUrl={post.imageUrl}
-              />
-            ))}
+            {isLoading ? (
+              <Spinner />
+            ) : (
+              data.map((post, i) => (
+                <TagCard key={i} post={post} background="secondaryBackground" />
+              ))
+            )}
           </div>
           <button
             className="mt-4 block w-full rounded-3xl bg-gel-black py-6 text-sm font-semibold uppercase hover:opacity-60"

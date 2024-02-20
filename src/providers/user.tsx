@@ -53,8 +53,6 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
     getUsers();
   }, []);
 
-  console.log(allUsers);
-
   return (
     <UserContext.Provider
       value={{ allUsers, currentUser, userLoading, setCurrentUser }}
