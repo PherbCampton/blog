@@ -16,6 +16,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 export type Profile = {
   bio: string;
   email: string;
+  savedAt?: number;
   username: string;
   theme: OptionType;
   userImg: string | undefined;
@@ -160,7 +161,7 @@ export const ProfileTab = ({ handleProfileTheme, getUserData }: Props) => {
             </div>
             <img
               alt="profile image"
-              className="rounded-full w-[150px] h-[150px]"
+              className="rounded-full w-[150px] h-[150px] object-cover"
               src={
                 imgUrl ? imgUrl : form.userImg ? form.userImg : defaultAvatar
               }
@@ -183,7 +184,7 @@ export const ProfileTab = ({ handleProfileTheme, getUserData }: Props) => {
         </label>
       </div>
       <Input
-        name="name"
+        name="username"
         type="text"
         label="Name"
         setForm={setForm}

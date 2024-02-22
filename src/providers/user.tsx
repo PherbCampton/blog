@@ -8,8 +8,8 @@ import {
   PropsWithChildren,
 } from "react";
 import { auth, db } from "../firebase/firebase";
-import { Loading } from "../components/loader/loading";
 import { Profile } from "../components/profile-tab";
+import { Loading } from "../components/loader/loading";
 import { collection, getDocs } from "firebase/firestore";
 import { User, onAuthStateChanged } from "firebase/auth";
 
@@ -57,7 +57,7 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
     <UserContext.Provider
       value={{ allUsers, currentUser, userLoading, setCurrentUser }}
     >
-      {isLoading ? <Loading /> : children}
+      {isLoading || userLoading ? <Loading /> : children}
     </UserContext.Provider>
   );
 };

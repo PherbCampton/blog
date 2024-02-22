@@ -15,8 +15,16 @@ export const useTimeAgo = (postCreatedAt: string): string => {
       const hours: number = Math.floor(minutes / 60);
       const days: number = Math.floor(hours / 24);
 
-      if (days > 0) {
+      if (days > 7) {
+        return postCreationTime.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        });
+      } else if (days > 1) {
         return `${days} day${days > 1 ? "s" : ""} ago`;
+      } else if (days === 1) {
+        return "yesterday";
       } else if (hours > 0) {
         return `${hours} hour${hours > 1 ? "s" : ""} ago`;
       } else if (minutes > 0) {
@@ -34,7 +42,7 @@ export const useTimeAgo = (postCreatedAt: string): string => {
         new Date().getTime() - postCreationTime.getTime()
       );
       setTimeAgo(newTimeAgoText);
-    }, 10000); // Update every 10 seconds
+    }, 10000);
 
     return () => clearInterval(interval);
   }, [postCreatedAt]);

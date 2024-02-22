@@ -1,6 +1,8 @@
+import { Spinner } from "./spinner";
 import { useFetch } from "../hooks/useFetch";
 import { OptionType } from "./single-select";
-import { Spinner } from "./spinner";
+import { AiOutlineComment } from "react-icons/ai";
+import { FcLike, FcLikePlaceholder } from "react-icons/fc";
 
 export type PostType = {
   id: string;
@@ -10,6 +12,7 @@ export type PostType = {
   content: string;
   tag: OptionType;
   postImg: string;
+  savedAt?: number;
   createdAt: number;
   pageViews: number;
   description: string;
@@ -52,7 +55,7 @@ export const TagCard = ({ post, background }: Props) => {
         <div className="mt-2 flex-1 text-2xl font-bold transition-all delay-75 duration-200 group-hover:-translate-y-5 group-hover:scale-105 group-hover:opacity-0">
           {title}
         </div>
-        <div className="use-case-projects flex transition-all delay-100 duration-200 group-hover:translate-y-5 group-hover:scale-105 group-hover:opacity-0">
+        <div className="use-case-projects flex justify-between items-center transition-all delay-100 duration-200 group-hover:translate-y-5 group-hover:scale-105 group-hover:opacity-0">
           <figure className="-ml-[14px] flex max-h-[46px] max-w-[46px] items-center overflow-hidden rounded-full border-[3px] border-gel-black text-black">
             {isLoading ? (
               <Spinner size="40" />
@@ -67,15 +70,25 @@ export const TagCard = ({ post, background }: Props) => {
                   width="40"
                   height="40"
                   alt="ZedRun"
-                  loading="lazy"
-                  className="h-full w-full"
-                  src={getUserData?.userImg}
                   sizes="40px"
+                  loading="lazy"
+                  src={getUserData?.userImg}
                   srcSet={`${getUserData?.userImg} 40w`}
+                  className="object-cover min-h-[40px] min-w-[40px] "
                 />
               </picture>
             )}
           </figure>
+          <div className="flex items-center gap-2">
+            <div className="flex gap-1.5 items-center">
+              <FcLikePlaceholder opacity={0.5} size={20} />
+              <span className="text-xs font-semibold opacity-80">144</span>
+            </div>
+            <div className="flex gap-1.5 items-center">
+              <AiOutlineComment opacity={0.5} size={20} />
+              <span className="text-xs font-semibold opacity-80">153</span>
+            </div>
+          </div>
         </div>
       </div>
     </a>

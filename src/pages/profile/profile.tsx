@@ -1,19 +1,22 @@
-import { userPosts } from "../../data";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useUser } from "../../providers/user";
 import { useFetch } from "../../hooks/useFetch";
+import { Follow } from "../../components/follow";
 import { Tabs, Tab } from "../../components/tabs";
 import { Interest } from "../../components/interest";
-import { FeedsCard } from "../../components/feeds-card";
+import { UserPosts } from "../../components/user-posts";
 import { ProfileTab } from "../../components/profile-tab";
+import { SavedPosts } from "../../components/saved-posts";
 import defaultAvatar from "../../assets/default-avatar.jpg";
-import { DashboardCard } from "../../components/dashboard-card";
+import { useSingleFetch } from "../../hooks/useSingleFetch";
 
 export const Profile = () => {
-  const { allUsers } = useUser();
+  const { currentUser, allUsers } = useUser();
   const { userId } = useParams();
   const { isLoading, data } = useFetch("posts");
+  const { data: follows } = useSingleFetch("users", userId, "follows");
+  const { data: followers } = useSingleFetch("users", userId, "followers");
   // const { currentUser } = useUser();
 
   const getUserData = allUsers.find((user) => user.userId === userId);
@@ -36,29 +39,23 @@ export const Profile = () => {
       color: theme,
       content: (
         <div className="mt-10 flex flex-col gap-10">
-          {userPosts.map((post, i) => (
-            <DashboardCard
-              key={i}
-              editable
-              title={post.title}
-              description={post.description}
-            />
-          ))}
+          <UserPosts getUserData={getUserData} />
         </div>
       ),
     },
     {
-      title: "Favorites",
+      title: "Saved",
       color: theme,
       content: (
         <div className="mt-10 flex flex-col gap-10">
-          {data.map((post, i) => (
-            <FeedsCard key={i} post={post} />
-          ))}
+          <SavedPosts getUserData={getUserData} />
         </div>
       ),
     },
-    {
+  ];
+
+  if (currentUser && getUserData && currentUser.uid === getUserData.userId) {
+    tabs.push({
       title: "Profile",
       color: theme,
       content: (
@@ -69,8 +66,8 @@ export const Profile = () => {
           />
         </div>
       ),
-    },
-  ];
+    });
+  }
 
   return (
     <>
@@ -83,27 +80,31 @@ export const Profile = () => {
                   {getUserData?.username}
                 </span>
                 <span className="text-gel-gray text-sm px-2 tracking-tighter">
-                  Following (12)
+                  Following ({follows.length})
                 </span>
                 <span className="text-gel-gray text-sm px-2 tracking-tighter">
-                  Followers (43)
+                  Followers ({followers.length})
                 </span>
               </div>
               <Tabs tabs={tabs} />
             </div>
             <aside className="block">
               <div className="sticky top-10">
-                <div className="mb-4 ">
+                <div className="mb-4 flex items-end">
                   <img
                     alt="profile image"
-                    className="rounded-full w-[100px] h-[100px] "
+                    className="rounded-full w-[100px] h-[100px] object-cover "
                     src={
                       !getUserData?.userImg
                         ? defaultAvatar
                         : getUserData?.userImg
                     }
                   />
+                  {currentUser.uid !== getUserData.userId && (
+                    <Follow userId={getUserData?.userId} />
+                  )}
                 </div>
+
                 <h3 className={`font-bold mt-1 opacity-80  `}>
                   {getUserData?.username}
                 </h3>

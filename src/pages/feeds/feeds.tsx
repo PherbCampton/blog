@@ -30,15 +30,17 @@ export const Feeds = () => {
         <div className="mt-8 rounded-[36px] bg-gel-black px-4 pt-40 pb-16 lg:px-8">
           <div className="mt-10 grid gap-24 lg:grid-cols-3">
             <div className="col-span-2 scrollbar-hide">
-              {selectedTag == null && (
+              {isLoading ? (
+                <div className="mt-10 opacity-50">
+                  <Spinner size="50" />
+                </div>
+              ) : (
                 <div>
-                  {isLoading ? (
-                    <Spinner size="50" />
-                  ) : (
-                    <>
+                  {selectedTag == null && (
+                    <div>
                       <h2 className=" max-w-[360px] text-left text-2xl font-bold">
                         <span className="gel-gradient-text-peach px-3">
-                          Trending posts
+                          Trending on Chatter...
                         </span>
                       </h2>
                       <div className="use-cases-list grid grid-cols-1 gap-4 sm:grid-cols-2 mt-5">
@@ -50,29 +52,31 @@ export const Feeds = () => {
                           />
                         ))}
                       </div>
-                    </>
+                    </div>
                   )}
+                  <div className="rounded-3xl sticky top-8 backdrop-blur-lg backdrop-brightness-90 mx-2 z-30 px-8 py-5 text-sm font-semibold mt-10 uppercase">
+                    <span className="gel-gradient-text-peach font-bold">
+                      feeds
+                    </span>
+                    <span className="text-gel-gray">
+                      - {selectedTag === null ? "all posts" : selectedTag}
+                    </span>
+                  </div>
+                  <div ref={parent} className=" flex flex-col gap-10">
+                    {filteredPosts.length === 0 ? (
+                      <p className="text-center mt-10 text-gel-gray">
+                        No posts available for the selected Category
+                      </p>
+                    ) : (
+                      <div ref={parent} className="mt-10 flex flex-col gap-10">
+                        {filteredPosts.map((post, i) => (
+                          <FeedsCard key={i} post={post} />
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
               )}
-              <div className="rounded-3xl sticky top-8 backdrop-blur-lg backdrop-brightness-90 mx-2 z-30 px-8 py-5 text-sm font-semibold mt-10 uppercase">
-                <span className="gel-gradient-text-peach font-bold">feeds</span>
-                <span className="text-gel-gray">
-                  - {selectedTag === null ? "all posts" : selectedTag}
-                </span>
-              </div>
-              <div ref={parent} className=" flex flex-col gap-10">
-                {filteredPosts.length === 0 ? (
-                  <p className="text-center mt-10 text-gel-gray">
-                    No posts available for the selected Category
-                  </p>
-                ) : (
-                  <div ref={parent} className="mt-10 flex flex-col gap-10">
-                    {filteredPosts.map((post, i) => (
-                      <FeedsCard key={i} post={post} />
-                    ))}
-                  </div>
-                )}
-              </div>
             </div>
             <aside className="block">
               <div className="sticky top-10">
