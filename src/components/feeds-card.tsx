@@ -1,22 +1,31 @@
 import { Spinner } from "./spinner";
 import { PostType } from "./tag-card";
+import { useUser } from "../providers/user";
 import { useFetch } from "../hooks/useFetch";
+import { Saved } from "./post-actions/saved";
 import { useTimeAgo } from "../hooks/useTimeAgo";
 import { AiOutlineComment } from "react-icons/ai";
-import { FcLike, FcLikePlaceholder } from "react-icons/fc";
 import { useReadTime } from "../hooks/useReadTime";
-import { Saved } from "./saved";
-import { useUser } from "../providers/user";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Like } from "./post-actions/like";
 
 type Props = {
   post: PostType;
 };
 
 export const FeedsCard = ({ post }: Props) => {
+  const navigate = useNavigate();
   const { currentUser } = useUser();
   const { data, isLoading } = useFetch("users");
-  const { title, tag, userId, description, createdAt, content } = post;
+  const {
+    tag,
+    title,
+    userId,
+    content,
+    createdAt,
+    id: postId,
+    description,
+  } = post;
   const getUserData = data && data?.find((user) => user?.userId === userId);
 
   const timeAgo = useTimeAgo(createdAt);
@@ -38,8 +47,8 @@ export const FeedsCard = ({ post }: Props) => {
                 ) : (
                   <picture>
                     <source
-                      type="image/webp"
                       sizes="40px"
+                      type="image/webp"
                       srcSet={`${getUserData?.userImg} 40w`}
                     />
                     <img
@@ -72,14 +81,14 @@ export const FeedsCard = ({ post }: Props) => {
           </p>
 
           <div className="flex items-center justify-between">
-            <button className="button solid-gradient outlined w-full border-gel-pink md:w-auto">
+            <button
+              onClick={() => navigate(`/post/${postId}`)}
+              className="button solid-gradient outlined w-full border-gel-pink md:w-auto"
+            >
               <span className="relative z-10">View more</span>
             </button>
             <div className="hidden md:flex items-center gap-2 ">
-              <div className="flex gap-1.5 items-center">
-                <FcLikePlaceholder opacity={0.5} size={20} />
-                <span className="text-xs font-semibold opacity-80">64</span>
-              </div>
+              <Like post={post} />
               <div className="flex gap-1.5 items-center">
                 <AiOutlineComment opacity={0.5} size={20} />
                 <span className="text-xs font-semibold opacity-80">203</span>

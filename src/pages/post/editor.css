@@ -1,0 +1,145 @@
+/* styles.css */
+
+.w-md-preview a {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.w-md-preview a:hover {
+  @apply opacity-60;
+}
+
+.w-md-preview p,
+.w-md-preview blockquote,
+.w-md-preview ul,
+.w-md-preview ol,
+.w-md-preview dl,
+.w-md-preview table,
+.w-md-preview pre {
+  @apply my-4;
+  color: #d1d5db;
+}
+
+.w-md-preview ul,
+.w-md-preview ol {
+  @apply pl-8;
+  list-style-type: disc;
+  margin-bottom: 1.25em;
+  margin-top: 1.25em;
+  padding-left: 1.625em;
+}
+
+.w-md-preview ul > li {
+  padding-left: 0.375em;
+  color: #d1d5db;
+  margin-bottom: 10px;
+}
+
+/* .w-md-preview h1 {
+  @apply text-3xl font-bold  my-8;
+} */
+
+.w-md-preview h2,
+.w-md-preview h1 {
+  @apply text-2xl font-bold  my-6;
+}
+
+.w-md-preview h3 {
+  @apply text-xl font-bold my-4;
+}
+
+.w-md-preview h4 {
+  @apply text-lg font-bold my-4;
+}
+
+.w-md-preview h5,
+.w-md-preview h6 {
+  @apply text-base font-bold my-4;
+}
+
+.w-md-preview h1,
+.w-md-preview h2,
+.w-md-preview h3,
+.w-md-preview h4,
+.w-md-preview h5,
+.w-md-preview h6 {
+  @apply font-bold;
+  @apply leading-tight;
+  @apply my-4;
+}
+
+.w-md-preview h1 + p,
+.w-md-preview h2 + p,
+.w-md-preview h3 + p {
+  @apply mt-5;
+}
+
+.w-md-preview img {
+  @apply max-w-full rounded-3xl mb-8;
+}
+
+.w-md-preview code,
+.w-md-preview pre {
+  @apply rounded-xl;
+}
+
+.w-md-preview code {
+  @apply text-sm;
+  @apply p-1;
+}
+
+.w-md-preview pre {
+  @apply p-4 bg-primaryBackground;
+  @apply my-4;
+}
+
+.outline-list li {
+  position: relative;
+}
+
+.outline-list li:hover {
+  opacity: 0.5;
+}
+
+.outline-list .h2 {
+  margin-top: 0.75rem;
+  padding-left: 0.75rem;
+  font-size: 0.875rem;
+  color: #baafae;
+}
+
+.outline-list .h2:before {
+  content: "•";
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+.outline-list .h3 {
+  --tw-text-opacity: 0.5;
+  color: #ffffff80;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding-left: 0.75rem;
+}
+
+.outline-list .h3:before {
+  content: "- ";
+}
+
+.outline-list .h4,
+.outline-list .h5,
+.outline-list .h6 {
+  --tw-text-opacity: 0.5;
+  color: #ffffff80;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding-left: 1rem;
+}
+
+.outline-list .h4:before,
+.outline-list .h5:before,
+.outline-list .h6:before {
+  content: "―";
+  margin-right: 6px;
+}

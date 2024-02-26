@@ -4207,3 +4207,21 @@ textarea {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 10;
 }
+
+.scale-up {
+  animation: scaleUp 2s ease;
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

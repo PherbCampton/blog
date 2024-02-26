@@ -15,7 +15,7 @@ function SmoothScroll({ children }: SmoothScrollProps) {
     if (navType == "POP") {
       window.scrollTo({
         top: 0,
-        behavior: "smooth",
+        behavior: "auto",
       });
     }
   }, [location, navType]);

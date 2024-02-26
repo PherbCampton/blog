@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const useTimeAgo = (postCreatedAt: string): string => {
+export const useTimeAgo = (postCreatedAt: number): string => {
   const [timeAgo, setTimeAgo] = useState<string>("");
 
   useEffect(() => {

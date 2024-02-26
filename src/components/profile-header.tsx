@@ -84,7 +84,7 @@ export const ProfileHeader = () => {
               )}
             </div>
             <div className="group/parent hidden text-sm lg:flex items-center">
-              <div className="py-[20px] hover:opacity-75 font-medium lg:pr-2 cursor-pointer  text-primaryBackground rounded-full">
+              <div className=" hover:opacity-75 font-medium lg:pr-2 cursor-pointer  text-primaryBackground rounded-full">
                 <figure className=" flex max-h-[46px] max-w-[46px] items-center overflow-hidden rounded-full border-[3px] border-gel-background text-black">
                   {userLoading ? (
                     <Spinner size="40" />

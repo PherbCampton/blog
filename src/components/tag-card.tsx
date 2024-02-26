@@ -2,7 +2,8 @@ import { Spinner } from "./spinner";
 import { useFetch } from "../hooks/useFetch";
 import { OptionType } from "./single-select";
 import { AiOutlineComment } from "react-icons/ai";
-import { FcLike, FcLikePlaceholder } from "react-icons/fc";
+import { Like } from "./post-actions/like";
+import { Link } from "react-router-dom";
 
 export type PostType = {
   id: string;
@@ -24,13 +25,13 @@ type Props = {
 };
 
 export const TagCard = ({ post, background }: Props) => {
-  const { title, tag, userId } = post;
+  const { title, tag, userId, id: postId } = post;
   const { data, isLoading } = useFetch("users");
   const getUserData = data && data?.find((user) => user?.userId === userId);
 
   return (
-    <a
-      href="/blog/nft-lending-management"
+    <Link
+      to={`/post/${postId}`}
       className={`relative flex h-[261px] flex-col rounded-3xl bg-${background} p-8 text-sm`}
     >
       <div className="flex flex-1 flex-col">
@@ -80,10 +81,7 @@ export const TagCard = ({ post, background }: Props) => {
             )}
           </figure>
           <div className="flex items-center gap-2">
-            <div className="flex gap-1.5 items-center">
-              <FcLikePlaceholder opacity={0.5} size={20} />
-              <span className="text-xs font-semibold opacity-80">144</span>
-            </div>
+            <Like post={post} />
             <div className="flex gap-1.5 items-center">
               <AiOutlineComment opacity={0.5} size={20} />
               <span className="text-xs font-semibold opacity-80">153</span>
@@ -91,6 +89,6 @@ export const TagCard = ({ post, background }: Props) => {
           </div>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };

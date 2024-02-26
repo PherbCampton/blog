@@ -1,10 +1,10 @@
-import { PostType } from "./tag-card";
+import { PostType } from "../tag-card";
 import { toast } from "react-toastify";
-import { db } from "../firebase/firebase";
-import { useUser } from "../providers/user";
+import { db } from "../../firebase/firebase";
+import { useUser } from "../../providers/user";
 import { useEffect, useState } from "react";
 import { BsSave2, BsSave2Fill } from "react-icons/bs";
-import { useSingleFetch } from "../hooks/useSingleFetch";
+import { useSingleFetch } from "../../hooks/useSingleFetch";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
 
 type Props = {

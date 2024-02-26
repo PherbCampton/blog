@@ -16,6 +16,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { ProfileHeader } from "./components/profile-header";
 
 import "react-toastify/dist/ReactToastify.css";
+import { Post } from "./pages/post";
 
 export default function App() {
   const userContext = useUser();
@@ -28,6 +29,7 @@ export default function App() {
         <Routes>
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/post/:postId" element={<Post />} />
           {!currentUser && <Route path="/" element={<Home />} />}
           {currentUser && <Route path="/feeds" element={<Feeds />} />}
           {!currentUser && <Route path="/sign-in" element={<SignIn />} />}
