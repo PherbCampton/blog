@@ -2,7 +2,7 @@ import { useState } from "react";
 import { tags } from "../../data";
 import { useFetch } from "../../hooks/useFetch";
 import { Spinner } from "../../components/spinner";
-import { TagCard } from "../../components/tag-card";
+import { PostType, TagCard } from "../../components/tag-card";
 import { FeedsCard } from "../../components/feeds-card";
 import { Categories } from "../../components/categories";
 import { useFilteredPosts } from "../../hooks/useFilter";
@@ -12,8 +12,8 @@ export const Feeds = () => {
   const { isLoading, data } = useFetch("posts");
   const [parent] = useAutoAnimate();
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
-  const filteredPosts = useFilteredPosts(data, selectedTag);
-  const trendingPosts = [...data]
+  const filteredPosts = useFilteredPosts(data as PostType[], selectedTag);
+  const trendingPosts = [...(data as PostType[])]
     .sort((a, b) => b.pageViews - a.pageViews)
     .slice(0, 4);
 
@@ -47,7 +47,7 @@ export const Feeds = () => {
                         {trendingPosts.map((post, i) => (
                           <TagCard
                             key={i}
-                            post={post}
+                            post={post as PostType}
                             background="primaryBackground"
                           />
                         ))}

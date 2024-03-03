@@ -1,9 +1,9 @@
 import { Spinner } from "./spinner";
+import { Link } from "react-router-dom";
+import { Like } from "./post-actions/like";
 import { useFetch } from "../hooks/useFetch";
 import { OptionType } from "./single-select";
-import { AiOutlineComment } from "react-icons/ai";
-import { Like } from "./post-actions/like";
-import { Link } from "react-router-dom";
+import { Comment } from "./post-actions/comment";
 
 export type PostType = {
   id: string;
@@ -13,9 +13,11 @@ export type PostType = {
   content: string;
   tag: OptionType;
   postImg: string;
+  userImg?: string;
   savedAt?: number;
   createdAt: number;
   pageViews: number;
+  username?: string;
   description: string;
 };
 
@@ -25,8 +27,8 @@ type Props = {
 };
 
 export const TagCard = ({ post, background }: Props) => {
-  const { title, tag, userId, id: postId } = post;
   const { data, isLoading } = useFetch("users");
+  const { title, tag, userId, id: postId } = post;
   const getUserData = data && data?.find((user) => user?.userId === userId);
 
   return (
@@ -73,7 +75,7 @@ export const TagCard = ({ post, background }: Props) => {
                   alt="ZedRun"
                   sizes="40px"
                   loading="lazy"
-                  src={getUserData?.userImg}
+                  src={getUserData?.userImg as string}
                   srcSet={`${getUserData?.userImg} 40w`}
                   className="object-cover min-h-[40px] min-w-[40px] "
                 />
@@ -82,10 +84,7 @@ export const TagCard = ({ post, background }: Props) => {
           </figure>
           <div className="flex items-center gap-2">
             <Like post={post} />
-            <div className="flex gap-1.5 items-center">
-              <AiOutlineComment opacity={0.5} size={20} />
-              <span className="text-xs font-semibold opacity-80">153</span>
-            </div>
+            <Comment post={post} />
           </div>
         </div>
       </div>

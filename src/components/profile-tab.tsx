@@ -7,7 +7,7 @@ import { IoTrashBin } from "react-icons/io5";
 import { tags, profileColors } from "../data";
 import { db, storage } from "../firebase/firebase";
 import { doc, updateDoc } from "firebase/firestore";
-import defaultAvatar from "../assets/default-avatar.jpg";
+import defaultAvatar from "../assets/profile-placeholder.jpg";
 import SingleSelect, { OptionType } from "./single-select";
 import { FormEvent, useEffect, useState, useRef } from "react";
 import MultiSelect, { MultiSelectProps } from "./multi-select";
@@ -17,9 +17,11 @@ export type Profile = {
   bio: string;
   email: string;
   savedAt?: number;
+  tag?: OptionType;
   username: string;
   theme: OptionType;
-  userImg: string | undefined;
+  userImg: string | File;
+  id?: string | undefined;
   userId?: string | undefined;
   interests: MultiSelectProps["options"];
 };
@@ -102,12 +104,15 @@ export const ProfileTab = ({ handleProfileTheme, getUserData }: Props) => {
     setIsLoading(true);
 
     const storageRef = ref(storage, `images/${uuid()}`);
-    await uploadBytes(storageRef, form?.userImg);
+    await uploadBytes(
+      storageRef,
+      form?.userImg as Blob | Uint8Array | ArrayBuffer
+    );
 
     const imageUrl = await getDownloadURL(storageRef);
 
     try {
-      const docRef = doc(db, "users", getUserData?.userId);
+      const docRef = doc(db, "users", getUserData?.userId as string);
       await updateDoc(docRef, {
         bio: form.bio,
         userImg: imageUrl,
@@ -163,7 +168,11 @@ export const ProfileTab = ({ handleProfileTheme, getUserData }: Props) => {
               alt="profile image"
               className="rounded-full w-[150px] h-[150px] object-cover"
               src={
-                imgUrl ? imgUrl : form.userImg ? form.userImg : defaultAvatar
+                imgUrl
+                  ? (imgUrl as string)
+                  : form.userImg
+                  ? (form.userImg as string)
+                  : defaultAvatar
               }
             />
             <input

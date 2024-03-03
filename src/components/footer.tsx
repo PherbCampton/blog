@@ -324,8 +324,8 @@ export const Footer = () => {
       <div className="mt-16 flex flex-col flex-wrap justify-between pl-8 text-sm lg:flex-row lg:flex-nowrap lg:pl-10">
         <div className="copy">
           {" "}
-          Web3's cloud platform <br className="block sm:hidden" /> ©2024 Gelato
-          Digital{" "}
+          The text-based platform <br className="block sm:hidden" /> ©2024
+          Chatter Blog{" "}
         </div>
         <ul className="mt-2 flex gap-2 pr-8 lg:mt-0">
           <li>

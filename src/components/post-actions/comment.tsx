@@ -1,69 +1,38 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { PostType } from "../tag-card";
-import { toast } from "react-toastify";
-import { db } from "../../firebase/firebase";
-import { useUser } from "../../providers/user";
 import { useEffect, useState } from "react";
-import { BsSave2, BsSave2Fill } from "react-icons/bs";
+import { AiOutlineComment } from "react-icons/ai";
 import { useSingleFetch } from "../../hooks/useSingleFetch";
-import { deleteDoc, doc, setDoc } from "firebase/firestore";
+import { useNumFormatter } from "../../hooks/useNumFormatter";
 
 type Props = {
   post: PostType;
 };
 
-export const Saved = ({ post }: Props) => {
-  const [isSaved, setIsSaved] = useState(true);
-  const { currentUser, userLoading } = useUser();
-  const { id, userId } = post;
+export const Comment = ({ post }: Props) => {
+  const [commentCount, setCommentCount] = useState(0);
 
-  const { data, isLoading, refetch } = useSingleFetch(
-    "users",
-    currentUser.uid,
-    "savedPost"
-  );
+  if (!post) {
+    return null;
+  }
+
+  const { id } = post;
+  const { data } = useSingleFetch("posts", id, "comments");
 
   useEffect(() => {
-    if (data) {
-      setIsSaved(data && data.find((item) => item.id === id));
-    }
-  }, [data, id]);
+    setCommentCount(data.length);
+  }, [data]);
 
-  const handleSave = async () => {
-    try {
-      if (currentUser) {
-        const saveRef = doc(db, "users", currentUser?.uid, "savedPost", id);
-
-        if (isSaved) {
-          await deleteDoc(saveRef);
-          toast.success("Post unsaved");
-        } else {
-          await setDoc(saveRef, {
-            ...post,
-            savedAt: Date.now(),
-          });
-          toast.success("Post saved");
-        }
-        setIsSaved(!isSaved);
-        refetch();
-      }
-    } catch (error) {
-      toast.error(error.message as Error);
-    }
-  };
+  const formattedNum = useNumFormatter(commentCount);
 
   return (
-    <div className="flex gap-1.5 items-center" onClick={handleSave}>
-      {isSaved ? (
-        <BsSave2Fill
-          size={16}
-          className=" opacity-50 hover:opacity-100 cursor-pointer"
-        />
-      ) : (
-        <BsSave2
-          size={16}
-          className=" opacity-50 hover:opacity-100 cursor-pointer"
-        />
-      )}
+    <div className="flex gap-1.5 items-center">
+      <AiOutlineComment
+        opacity={0.5}
+        size={20}
+        className="hover:opacity-100 cursor-pointer"
+      />
+      <span className="text-xs font-semibold opacity-80 ">{formattedNum}</span>
     </div>
   );
 };

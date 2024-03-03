@@ -11,7 +11,7 @@ type Props = {
   post: PostType;
 };
 
-export const Saved = ({ post }: Props) => {
+export const Delete = ({ post }: Props) => {
   const [isSaved, setIsSaved] = useState(true);
   const { currentUser, userLoading } = useUser();
   const { id, userId } = post;

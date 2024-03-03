@@ -4,8 +4,7 @@ export const Newsletter = () => {
       <div className="rounded-3xl bg-gel-black p-8">
         <div className="text-lg font-bold text-gel-gray-2">Get in touch</div>
         <div className="mb-8 mt-2 text-3xl font-bold md:text-2xl lg:text-3xl">
-          Building with Gelato means you are part of an active developer
-          community
+          Writing on Chatter means you are part of an active community
         </div>
         <a
           href="https://discord.gg/ApbA39BKyJ"

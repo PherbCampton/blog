@@ -1,14 +1,29 @@
+import { useState } from "react";
+import { tags } from "../../data";
 import { Tag } from "../../components/tag";
 import { Hero } from "../../utilities/hero";
-import { tags, trending } from "../../data";
+import { useNavigate } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch";
 import { Spinner } from "../../components/spinner";
-import { TagCard } from "../../components/tag-card";
 import { Newsletter } from "../../components/newsletter";
+import { useFilteredPosts } from "../../hooks/useFilter";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { PostType, TagCard } from "../../components/tag-card";
 import { TrendingCard } from "../../components/trending-card";
 
 export const Home = () => {
+  const navigate = useNavigate();
+  const [parent] = useAutoAnimate();
   const { isLoading, data } = useFetch("posts");
+
+  const trendingPosts = [...(data as PostType[])]
+    .sort((a, b) => b.pageViews - a.pageViews)
+    .slice(0, 6);
+
+  const [isFiltered, setIsFiltered] = useState<boolean>(false);
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const filteredPosts = useFilteredPosts(data as PostType[], selectedTag);
+
   return (
     <>
       <div className="container px-5">
@@ -31,13 +46,14 @@ export const Home = () => {
             </div>
           </div>
           <div className="grid gap-4 font-bold text-gel-alternative sm:grid-cols-2">
-            {trending.map((trend, i) => (
+            {trendingPosts.map((trend, i) => (
               <TrendingCard
                 key={i}
                 index={i}
+                postId={trend.id}
                 title={trend.title}
-                imageUrl={trend.imageUrl}
-                description={trend.description}
+                userId={trend.userId}
+                tag={trend.tag.label}
               />
             ))}
           </div>
@@ -52,27 +68,49 @@ export const Home = () => {
           <div className="scrollbar-hide scrollbar-hide -mx-5 mb-8 overflow-x-scroll pl-5">
             <ul className="m-auto flex max-w-4xl gap-2 font-semibold uppercase lg:flex-wrap lg:justify-center">
               {tags.map((tag, i) => (
-                <Tag key={i} tag={tag.title} color={tag.color} />
+                <Tag
+                  key={i}
+                  tag={tag.title}
+                  color={tag.color}
+                  onClick={() => {
+                    setIsFiltered(true);
+                    setSelectedTag(tag.title);
+                  }}
+                  isActive={
+                    isFiltered ? tag.title === selectedTag : !isFiltered
+                  }
+                />
               ))}
               <li className="min-w-[12px]"></li>
             </ul>
           </div>
-          <div className="use-cases-list grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div ref={parent}>
             {isLoading ? (
               <Spinner />
+            ) : filteredPosts.length === 0 ? (
+              <p className="text-center mt-10 text-gel-gray">
+                No posts available for the selected tag
+              </p>
             ) : (
-              data.map((post, i) => (
-                <TagCard key={i} post={post} background="secondaryBackground" />
-              ))
+              <div
+                ref={parent}
+                className="use-cases-list grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+              >
+                {[...filteredPosts].slice(0, 6).map((post, i) => (
+                  <TagCard
+                    key={i}
+                    post={post as PostType}
+                    background="secondaryBackground"
+                  />
+                ))}
+              </div>
             )}
           </div>
           <button
+            onClick={() => navigate(`/sign-in`)}
             className="mt-4 block w-full rounded-3xl bg-gel-black py-6 text-sm font-semibold uppercase hover:opacity-60"
-            data-v-aa017ec7=""
           >
-            <span className="gel-gradient-text-peach" data-v-aa017ec7="">
-              + show more
-            </span>
+            <span className="gel-gradient-text-peach">sign in for more</span>
           </button>
         </section>
         <Newsletter />

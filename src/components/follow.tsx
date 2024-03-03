@@ -1,25 +1,30 @@
-import { PostType } from "./tag-card";
 import { toast } from "react-toastify";
 import { db } from "../firebase/firebase";
 import { useUser } from "../providers/user";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaUserPlus, FaUserCheck } from "react-icons/fa";
 import { useSingleFetch } from "../hooks/useSingleFetch";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
 
 type Props = {
-  post: PostType;
+  userId: string;
 };
 
 export const Follow = ({ userId }: Props) => {
-  const [isFollowed, setIsFollowed] = useState(false);
+  const navigate = useNavigate();
   const { currentUser } = useUser();
+  const [isFollowed, setIsFollowed] = useState(false);
 
-  const { data } = useSingleFetch("users", currentUser.uid, "follows");
+  const { data } = useSingleFetch(
+    "users",
+    currentUser?.uid as string,
+    "follows"
+  );
 
   useEffect(() => {
     setIsFollowed(data && data.findIndex((item) => item.id === userId) !== -1);
-  }, [data]);
+  }, [data, userId]);
 
   const handleFollow = async () => {
     try {
@@ -46,10 +51,12 @@ export const Follow = ({ userId }: Props) => {
           });
           toast.success("User Followed");
         }
+        setIsFollowed(!isFollowed);
+      } else {
+        navigate("/sign-in");
       }
-      setIsFollowed(!isFollowed);
     } catch (error) {
-      toast.error(error.message as Error);
+      toast.error((error as Error).message);
     }
   };
 

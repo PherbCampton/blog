@@ -1,23 +1,28 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useUser } from "../../providers/user";
-import { useFetch } from "../../hooks/useFetch";
 import { Follow } from "../../components/follow";
 import { Tabs, Tab } from "../../components/tabs";
 import { Interest } from "../../components/interest";
 import { UserPosts } from "../../components/user-posts";
 import { ProfileTab } from "../../components/profile-tab";
 import { SavedPosts } from "../../components/saved-posts";
-import defaultAvatar from "../../assets/default-avatar.jpg";
 import { useSingleFetch } from "../../hooks/useSingleFetch";
+import defaultAvatar from "../../assets/profile-placeholder.jpg";
 
 export const Profile = () => {
-  const { currentUser, allUsers } = useUser();
   const { userId } = useParams();
-  const { isLoading, data } = useFetch("posts");
-  const { data: follows } = useSingleFetch("users", userId, "follows");
-  const { data: followers } = useSingleFetch("users", userId, "followers");
-  // const { currentUser } = useUser();
+  const { currentUser, allUsers } = useUser();
+  const { data: follows } = useSingleFetch(
+    "users",
+    userId as string,
+    "follows"
+  );
+  const { data: followers } = useSingleFetch(
+    "users",
+    userId as string,
+    "followers"
+  );
 
   const getUserData = allUsers.find((user) => user.userId === userId);
 
@@ -97,11 +102,11 @@ export const Profile = () => {
                     src={
                       !getUserData?.userImg
                         ? defaultAvatar
-                        : getUserData?.userImg
+                        : (getUserData?.userImg as string)
                     }
                   />
-                  {currentUser.uid !== getUserData.userId && (
-                    <Follow userId={getUserData?.userId} />
+                  {currentUser?.uid !== getUserData?.userId && (
+                    <Follow userId={getUserData?.userId as string} />
                   )}
                 </div>
 

@@ -1,13 +1,13 @@
 import { Spinner } from "./spinner";
 import { PostType } from "./tag-card";
+import { Like } from "./post-actions/like";
 import { useUser } from "../providers/user";
 import { useFetch } from "../hooks/useFetch";
 import { Saved } from "./post-actions/saved";
+import { Comment } from "./post-actions/comment";
 import { useTimeAgo } from "../hooks/useTimeAgo";
-import { AiOutlineComment } from "react-icons/ai";
 import { useReadTime } from "../hooks/useReadTime";
 import { Link, useNavigate } from "react-router-dom";
-import { Like } from "./post-actions/like";
 
 type Props = {
   post: PostType;
@@ -57,7 +57,7 @@ export const FeedsCard = ({ post }: Props) => {
                       alt="ZedRun"
                       loading="lazy"
                       sizes="40px"
-                      src={getUserData?.userImg}
+                      src={getUserData?.userImg as string}
                       srcSet={`${getUserData?.userImg} 40w`}
                       className="object-cover min-h-[40px] min-w-[40px]"
                     />
@@ -89,10 +89,7 @@ export const FeedsCard = ({ post }: Props) => {
             </button>
             <div className="hidden md:flex items-center gap-2 ">
               <Like post={post} />
-              <div className="flex gap-1.5 items-center">
-                <AiOutlineComment opacity={0.5} size={20} />
-                <span className="text-xs font-semibold opacity-80">203</span>
-              </div>
+              <Comment post={post} />
               {currentUser?.uid !== userId && <Saved post={post} />}
             </div>
           </div>

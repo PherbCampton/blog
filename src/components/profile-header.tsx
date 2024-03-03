@@ -1,4 +1,5 @@
-// import { profileNav } from "../data";
+import { Spinner } from "./spinner";
+import { SignOut } from "./sign-out";
 import logo from "../assets/chatter.svg";
 import { FiSearch } from "react-icons/fi";
 import { FaRegStar } from "react-icons/fa";
@@ -7,10 +8,9 @@ import { useUser } from "../providers/user";
 import { DropdownItem } from "./dropdown-item";
 import { Link, useLocation } from "react-router-dom";
 import { CgProfile, CgLogOut } from "react-icons/cg";
-import defaultAvatar from "../assets/default-avatar.jpg";
+import defaultAvatar from "../assets/profile-placeholder.jpg";
 import { IoMdNotificationsOutline, IoIosNotifications } from "react-icons/io";
-import { SignOut } from "./sign-out";
-import { Spinner } from "./spinner";
+
 // import Hamburger from "./hamburger/hamburger";
 
 export const ProfileHeader = () => {
@@ -107,7 +107,7 @@ export const ProfileHeader = () => {
                         sizes="40px"
                         src={
                           getUserData?.userImg
-                            ? getUserData?.userImg
+                            ? (getUserData?.userImg as string)
                             : defaultAvatar
                         }
                         srcSet={`${
@@ -134,8 +134,8 @@ export const ProfileHeader = () => {
                     </DropdownItem>
                     <DropdownItem
                       title="Notifications"
-                      link={`/profile/${currentUser?.uid}`}
                       description="Stay updated"
+                      link={`/profile/${currentUser?.uid}`}
                     >
                       {notification > 0 ? (
                         <IoIosNotifications

@@ -1,8 +1,9 @@
 import { PostType } from "../tag-card";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 import { db } from "../../firebase/firebase";
 import { useUser } from "../../providers/user";
-import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FcLike, FcLikePlaceholder } from "react-icons/fc";
 import { useSingleFetch } from "../../hooks/useSingleFetch";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
@@ -13,14 +14,16 @@ type Props = {
 };
 
 export const Like = ({ post }: Props) => {
-  const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(0);
-  const [likeBounce, setLikeBounce] = useState(false);
-  const { currentUser } = useUser();
   const { id } = post;
+  const navigate = useNavigate();
+  const { currentUser } = useUser();
 
-  const { data, refetch } = useSingleFetch("posts", id, "likes");
+  const [likeCount, setLikeCount] = useState(0);
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeBounce, setLikeBounce] = useState(false);
+
   const formattedNum = useNumFormatter(likeCount);
+  const { data, refetch } = useSingleFetch("posts", id, "likes");
 
   useEffect(() => {
     if (data) {
@@ -56,9 +59,11 @@ export const Like = ({ post }: Props) => {
         setTimeout(() => {
           refetch();
         }, 5000);
+      } else {
+        navigate("/sign-in");
       }
     } catch (error) {
-      toast.error(error.message as Error);
+      toast.error((error as Error).message);
       setIsLiked(!isLiked);
       setLikeCount(isLiked ? likeCount + 1 : likeCount - 1);
     }

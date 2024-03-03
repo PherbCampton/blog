@@ -26,7 +26,7 @@ export const Tabs: React.FC<TabsProps> = ({ tabs }) => {
               {" "}
               <button
                 onClick={() => handleTabClick(index)}
-                className={`cursor-pointer whitespace-nowrap rounded-full border px-8 py-4 text-sm text-white transition-all hover:text-white hover:opacity-80 hover:text-opacity-70 ${
+                className={`cursor-pointer whitespace-nowrap rounded-full border px-4 py-2 text-sm text-white transition-all hover:text-white hover:opacity-80 hover:text-opacity-70 ${
                   activeTabIndex === index
                     ? "opacity-100 text-opacity-100"
                     : "opacity-30 text-opacity-60"

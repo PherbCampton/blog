@@ -67,7 +67,10 @@ export const Publish = () => {
       setIsLoading(true);
       const collections = collection(db, "posts");
       const storageRef = ref(storage, `preview-image/${uuid()}`);
-      await uploadBytes(storageRef, form?.postImg);
+      await uploadBytes(
+        storageRef,
+        form?.postImg as unknown as Blob | ArrayBuffer | Uint8Array
+      );
 
       const imageUrl = await getDownloadURL(storageRef);
 
@@ -114,7 +117,7 @@ export const Publish = () => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setImgUrl(URL.createObjectURL(file));
-      setForm({ ...form, postImg: file });
+      setForm({ ...form, postImg: file as unknown as string });
     }
   };
 
@@ -122,8 +125,8 @@ export const Publish = () => {
     imgRef?.current?.click();
   };
 
-  const handleMarkdown = (value: any) => {
-    setForm({ ...form, markdown: value });
+  const handleMarkdown = (value: string | undefined) => {
+    setForm({ ...form, markdown: value as string });
   };
 
   return (
@@ -154,10 +157,10 @@ export const Publish = () => {
                 help="Let chatters know what your post is all about"
               />
               <Textarea
-                name="description"
                 setForm={setForm}
-                value={form.description}
+                name="description"
                 label="Description"
+                value={form.description}
               />
             </div>
             <div>

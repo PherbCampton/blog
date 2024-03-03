@@ -25,7 +25,8 @@
     "rehype-react": "^8.0.0",
     "remark": "^15.0.1",
     "remark-toc": "^9.0.0",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "wrangler": "^3.30.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.55",

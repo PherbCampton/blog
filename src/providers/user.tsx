@@ -14,8 +14,8 @@ import { collection, getDocs } from "firebase/firestore";
 import { User, onAuthStateChanged } from "firebase/auth";
 
 interface ContextType {
-  userLoading: boolean;
   allUsers: Profile[];
+  userLoading: boolean;
   currentUser: User | null;
   setCurrentUser: Dispatch<SetStateAction<User | null>>;
 }
@@ -55,7 +55,12 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
 
   return (
     <UserContext.Provider
-      value={{ allUsers, currentUser, userLoading, setCurrentUser }}
+      value={{
+        allUsers,
+        currentUser,
+        userLoading,
+        setCurrentUser,
+      }}
     >
       {isLoading || userLoading ? <Loading /> : children}
     </UserContext.Provider>

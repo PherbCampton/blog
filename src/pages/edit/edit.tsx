@@ -1,12 +1,13 @@
 import Markdown from "react-markdown";
 import { toast } from "react-toastify";
 import { db } from "../../firebase/firebase";
+import { Tab, Tabs } from "../../components/tabs";
 import { useUser } from "../../providers/user";
 import { BiSolidEditAlt } from "react-icons/bi";
 import { Follow } from "../../components/follow";
-import { Tab, Tabs } from "../../components/tabs";
 import { Outline } from "../../components/outline";
 import { Spinner } from "../../components/spinner";
+import { Link, useParams } from "react-router-dom";
 import { useTimeAgo } from "../../hooks/useTimeAgo";
 import { useEffect, useRef, useState } from "react";
 import { Comments } from "../../components/comments";
@@ -15,9 +16,8 @@ import { useReadTime } from "../../hooks/useReadTime";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { Like } from "../../components/post-actions/like";
 import { Recommended } from "../../components/recommended";
-import { Share } from "../../components/post-actions/share";
 import { Saved } from "../../components/post-actions/saved";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Share } from "../../components/post-actions/share";
 import { Comment } from "../../components/post-actions/comment";
 import defaultAvatar from "../../assets/profile-placeholder.jpg";
 import {
@@ -28,26 +28,14 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-import "./editor.css";
 import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
 
-export type TableOfContentsItem = {
-  id: string;
-  level: number;
-  title: string;
-  push?(arg0: { title: string; id: string; level: number }): unknown;
-};
-
-export const Post = () => {
+export const Edit = () => {
   const { postId } = useParams();
-  const navigate = useNavigate();
+  const [post, setPost] = useState({});
   const { currentUser, allUsers } = useUser();
   const [isLoading, setIsLoading] = useState(false);
-  const [post, setPost] = useState<PostType>({} as PostType);
-  const [tableOfContents, setTableOfContents] = useState<TableOfContentsItem[]>(
-    []
-  );
 
   useEffect(() => {
     if (!postId) {
@@ -61,7 +49,7 @@ export const Post = () => {
         const getPost = await getDoc(postRef);
 
         if (getPost.exists()) {
-          const postData = getPost.data() as PostType;
+          const postData = getPost.data();
           setPost({ ...postData, id: postId });
           if (postData?.userId) {
             const userRef = doc(db, "user", postData?.userId);
@@ -92,6 +80,8 @@ export const Post = () => {
   const timeAgo = useTimeAgo(createdAt);
   const readTime = useReadTime(content);
 
+  const [tableOfContents, setTableOfContents] = useState([]);
+
   const isInitialRender = useRef(true);
   useEffect(() => {
     if (isInitialRender.current && currentUser?.uid !== userId) {
@@ -102,7 +92,7 @@ export const Post = () => {
             ref,
             {
               pageViews: increment(1),
-            } as unknown as string | FieldPath,
+            } as unknown as FieldPath,
             {
               merge: true,
             }
@@ -124,22 +114,19 @@ export const Post = () => {
     }
 
     const headings = document.querySelectorAll("h2, h3, h4, h5, h6");
-    const toc: TableOfContentsItem[] = Array.from(headings).reduce(
-      (acc: TableOfContentsItem[], heading) => {
-        const title = heading?.textContent?.trim();
-        const id = title ? title.toLowerCase().replace(/\s+/g, "-") : "";
-        heading.id = id;
-        if (title && title !== "Outline") {
-          acc.push({
-            title: title,
-            id: heading.id,
-            level: parseInt(heading.tagName.charAt(1), 10),
-          });
-        }
-        return acc;
-      },
-      []
-    );
+    const toc = Array.from(headings).reduce((acc, heading) => {
+      const title = heading.textContent.trim();
+      const id = title.toLowerCase().replace(/\s+/g, "-");
+      heading.id = id;
+      if (title && title !== "Outline") {
+        acc.push({
+          title: title,
+          id: heading.id,
+          level: parseInt(heading.tagName.charAt(1)),
+        });
+      }
+      return acc;
+    }, []);
 
     setTableOfContents(toc);
   }, [content, isLoading]);
@@ -257,9 +244,9 @@ export const Post = () => {
                 <aside className="col-span-3 block lg:col-span-1">
                   <div className="sticky top-10 w-md-outline">
                     <div className="flex items-center gap-5 rounded-3xl backdrop-blur-lg backdrop-brightness-90 z-30 px-4 py-5 text-sm font-semibold  uppercase">
-                      <Like post={post} />
-                      <Comment post={post} />
-                      <Saved post={post} />
+                      <Like post={post as PostType} />
+                      <Comment post={post as PostType} />
+                      <Saved post={post as PostType} />
                       <Share />
                       {currentUser?.uid !== userId ? (
                         <Follow userId={userId} />
@@ -267,7 +254,6 @@ export const Post = () => {
                         <div className="flex items-center gap-4">
                           <BiSolidEditAlt
                             size={20}
-                            onClick={() => navigate(`/edit/${postId}`)}
                             className=" opacity-70 hover:opacity-100 cursor-pointer"
                           />
                           <MdOutlineDeleteOutline
@@ -284,7 +270,7 @@ export const Post = () => {
             </>
           )}
         </div>
-        <Recommended post={post} />
+        <Recommended post={post as PostType} />
       </div>
     </>
   );

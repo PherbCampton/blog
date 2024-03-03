@@ -50,8 +50,8 @@ export const Hero = ({
           </div>
         </div>
       </div>
-      <div data-v-339ef4f2="" className="py-6">
-        <i data-v-339ef4f2="" className="m-auto block w-4">
+      <div className="py-6">
+        <i className="m-auto block w-4">
           <svg
             width="16"
             height="16"

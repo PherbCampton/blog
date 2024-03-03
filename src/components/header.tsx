@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 // import Hamburger from "./hamburger/hamburger";
 
 export const Header = () => {
+  const [visible, setVisible] = useState(true);
   const [isActive, setIsActive] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
-  const [visible, setVisible] = useState(true);
   useEffect(() => {
     const scrollMe = () => {
       window.scrollY > 150 ? setIsActive(true) : setIsActive(false);
@@ -54,8 +54,8 @@ export const Header = () => {
             <div className="hidden text-sm lg:flex items-center">
               {nav.map((link, i) => (
                 <Link
-                  to={link.path}
                   key={i}
+                  to={link.path}
                   className="hover:opacity-75 lg:pl-5 lg:pr-5 font-medium"
                 >
                   {link.title}
