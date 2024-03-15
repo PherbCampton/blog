@@ -21,7 +21,7 @@ Welcome to the Chatter Blog App! This is a platform where users can publish and 
 
 ## Setup Instructions
 
-1. Clone the repository: `git clone <https://github.com/PherbCampton/blog>`
+1. Clone the repository: `git clone https://github.com/PherbCampton/blog`
 2. Install dependencies: `yarn install`
 3. Configure Firebase: Create a Firebase project and update the Firebase configuration in the project.
 4. Start the development server: `yarn dev`
