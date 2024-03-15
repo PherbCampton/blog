@@ -2,6 +2,8 @@
 
 Welcome to the Chatter Blog App! This is a platform where users can publish and engage with tech-related content across various categories, including AI, web development, mobile development, UI/UX, and more.
 
+![Chatter Blog App](https://chatter-blog.pages.dev/chatter-homepage.png)
+
 ## Features
 
 - **Publish Posts**: Users can create and publish tech-related posts.
