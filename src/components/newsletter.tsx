@@ -6,11 +6,7 @@ export const Newsletter = () => {
         <div className="mb-8 mt-2 text-3xl font-bold md:text-2xl lg:text-3xl">
           Writing on Chatter means you are part of an active community
         </div>
-        <a
-          href="https://discord.gg/ApbA39BKyJ"
-          className="group flex items-center hover:text-white"
-          target="_blank"
-        >
+        <a className="group flex items-center hover:text-white" target="_blank">
           <i className="mr-2 inline-block align-text-top transition-colors duration-500">
             <svg
               width="17"

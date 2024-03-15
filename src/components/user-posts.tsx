@@ -17,7 +17,7 @@ export const UserPosts = ({ getUserData }: Props) => {
   return (
     <div className=" items-center">
       <div className="flex flex-col gap-10">
-        {data.length === 0 && !isLoading && (
+        {userPosts.length === 0 && !isLoading && (
           <p className="text-center text-gel-gray">
             {currentUser?.uid === getUserData?.userId
               ? "You"

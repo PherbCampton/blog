@@ -32,11 +32,15 @@ export const SignIn = () => {
 
       if (!userDoc.exists()) {
         await setDoc(ref, {
+          x: "",
           bio: "",
+          linkedin: "",
+          instagram: "",
           userId: newUser.uid,
           email: newUser.email,
           userImg: newUser.photoURL,
           username: newUser.displayName,
+          theme: { value: "#fffff", label: "Default" },
         });
       }
       toast.success("You are in");
@@ -76,7 +80,7 @@ export const SignIn = () => {
   return (
     <>
       <div className="container px-5">
-        <div className="wrapper ">
+        <div className="wrapper">
           <div className="grid min-h-[670px] grid-cols-1 gap-16 overflow-hidden rounded-[36px] bg-gel-black px-8 pb-16 pt-40 lg:grid-cols-2">
             <div>
               <h1 className="text-6xl font-bold leading-tight tracking-tight">

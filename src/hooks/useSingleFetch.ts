@@ -19,24 +19,25 @@ export const useSingleFetch = (
 
   const fetchData = async () => {
     try {
-      const querySnapshot = await getDocs(
-        collection(db, id, subCollection, collectionName)
-      );
-
-      const rawData: (Profile | PostType | Comment)[] = querySnapshot.docs.map(
-        (doc) => ({
-          ...(doc.data() as Profile | PostType | Comment),
-          id: doc.id,
-        })
-      );
-      rawData.sort((a, b) => {
-        return (
-          new Date(b.savedAt as number).getTime() -
-          new Date(a.savedAt as number).getTime()
+      if (subCollection) {
+        const querySnapshot = await getDocs(
+          collection(db, id, subCollection, collectionName)
         );
-      });
-      setData(rawData);
-      setIsLoading(false);
+
+        const rawData: (Profile | PostType | Comment)[] =
+          querySnapshot.docs.map((doc) => ({
+            ...(doc.data() as Profile | PostType | Comment),
+            id: doc.id,
+          }));
+        rawData.sort((a, b) => {
+          return (
+            new Date(b.savedAt as number).getTime() -
+            new Date(a.savedAt as number).getTime()
+          );
+        });
+        setData(rawData);
+        setIsLoading(false);
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
       setIsLoading(false);

@@ -13,6 +13,25 @@ export const nav = [
   },
 ];
 
+export const mobileNavLinks = [
+  {
+    nav: "Sign in",
+    path: "/sign-in",
+  },
+  {
+    nav: "Home",
+    path: "/",
+  },
+  {
+    nav: "About",
+    path: "/about",
+  },
+  {
+    nav: "Contact Us",
+    path: "/contact",
+  },
+];
+
 export const profileNav = [
   {
     title: "Feeds",

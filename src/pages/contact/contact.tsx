@@ -25,7 +25,7 @@ export const Contact = () => {
       toast.error("All fields are required");
     } else {
       setIsLoading(true);
-      console.log(form);
+      // console.log(form);
       setIsLoading(false);
       setForm({
         name: "",

@@ -28,8 +28,8 @@ const networking = (
         y2="14.3333"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#F2BDE3"></stop>
-        <stop offset="1" stop-color="#7560CA"></stop>
+        <stop stopColor="#F2BDE3"></stop>
+        <stop offset="1" stopColor="#7560CA"></stop>
       </linearGradient>
     </defs>
   </svg>
@@ -59,8 +59,8 @@ const personal = (
         y2="16.4818"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#F2BDE3"></stop>
-        <stop offset="1" stop-color="#7560CA"></stop>
+        <stop stopColor="#F2BDE3"></stop>
+        <stop offset="1" stopColor="#7560CA"></stop>
       </linearGradient>
     </defs>
   </svg>
@@ -93,8 +93,8 @@ const SEO = (
         y2="17.1849"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#F2BDE3"></stop>
-        <stop offset="1" stop-color="#7560CA"></stop>
+        <stop stopColor="#F2BDE3"></stop>
+        <stop offset="1" stopColor="#7560CA"></stop>
       </linearGradient>
     </defs>
   </svg>
@@ -124,8 +124,8 @@ const visibility = (
         y2="16.4813"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#F2BDE3"></stop>
-        <stop offset="1" stop-color="#7560CA"></stop>
+        <stop stopColor="#F2BDE3"></stop>
+        <stop offset="1" stopColor="#7560CA"></stop>
       </linearGradient>
     </defs>
   </svg>

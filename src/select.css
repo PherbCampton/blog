@@ -102,3 +102,31 @@
   border-radius: 1rem !important;
   background-color: #191919 !important;
 }
+
+.Toastify__toast {
+  justify-content: center !important;
+  min-height: fit-content !important;
+}
+
+.Toastify__toast-container {
+  width: fit-content !important;
+}
+
+.Toastify__toast--warning,
+.Toastify__toast--success,
+.Toastify__toast--error {
+  border-radius: 40px !important;
+  min-height: fit-content !important;
+}
+.toastBody {
+  font-size: 0.875rem !important;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+
+.Toastify__progress-bar--wrp {
+  visibility: hidden !important;
+}
+.toastProgress {
+  background: inherit !important;
+  visibility: hidden;
+}

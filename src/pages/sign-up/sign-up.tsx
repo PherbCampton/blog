@@ -1,3 +1,4 @@
+import { tags } from "../../data";
 import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 import { FormEvent, useState } from "react";
@@ -8,6 +9,7 @@ import { LinkText } from "../../components/link-text";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { PrimaryBtn } from "../../components/primary-btn";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import MultiSelect, { MultiSelectProps } from "../../components/multi-select";
 
 export type SignUpForm = {
   name: string;
@@ -15,6 +17,7 @@ export type SignUpForm = {
   phone: string;
   password: string;
   rePassword: string;
+  interests: MultiSelectProps["options"];
 };
 
 export const SignUp = () => {
@@ -26,8 +29,22 @@ export const SignUp = () => {
     email: "",
     phone: "",
     password: "",
+    interests: [],
     rePassword: "",
   });
+
+  const options = tags.map((tag) => {
+    return { value: tag.color, label: tag.title };
+  });
+
+  const handleMultiSelectChange = (
+    selectedValues: MultiSelectProps["options"]
+  ) => {
+    setForm((prevForm: SignUpForm) => ({
+      ...prevForm,
+      interests: selectedValues,
+    }));
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -36,31 +53,44 @@ export const SignUp = () => {
     } else if (form.password !== form.rePassword) {
       toast.error("Password doesn't match");
     } else {
-      setIsLoading(true);
-      const { user } = await createUserWithEmailAndPassword(
-        auth,
-        form.email,
-        form.password
-      );
-      const ref = doc(db, "users", user.uid);
-      const userDoc = await getDoc(ref);
+      try {
+        setIsLoading(true);
+        const { user } = await createUserWithEmailAndPassword(
+          auth,
+          form.email,
+          form.password
+        );
+        const ref = doc(db, "users", user.uid);
+        const userDoc = await getDoc(ref);
 
-      if (!userDoc.exists()) {
-        await setDoc(ref, {
-          bio: "",
-          userImg: "",
-          interests: [],
-          userId: user.uid,
-          phone: form.phone,
-          email: form.email,
-          username: form.name,
-          password: form.password,
-          theme: { value: "#fffff", label: "Default" },
-        });
+        if (!userDoc.exists()) {
+          await setDoc(ref, {
+            x: "",
+            bio: "",
+            userImg: "",
+            linkedin: "",
+            instagram: "",
+            userId: user.uid,
+            phone: form.phone,
+            email: form.email,
+            username: form.name,
+            password: form.password,
+            interests: form.interests,
+            theme: { value: "#fffff", label: "Default" },
+          });
+
+          setIsLoading(false);
+          toast.success("Account created successfully");
+          navigate("/sign-in");
+        }
+      } catch (error) {
+        setIsLoading(false);
+        toast.error(
+          (error as Error).message === "Firebase: Error (auth/internal-error)."
+            ? "Check your internet connection"
+            : (error as Error).message
+        );
       }
-      setIsLoading(false);
-      toast.success("Account created successfully");
-      navigate("/sign-in");
     }
   };
 
@@ -105,6 +135,12 @@ export const SignUp = () => {
                   label="Email"
                   setForm={setForm}
                   value={form.email}
+                />
+                <MultiSelect
+                  maxSelected={4}
+                  options={options}
+                  selectedOptions={form.interests}
+                  onChange={handleMultiSelectChange}
                 />
                 <Input
                   type="password"

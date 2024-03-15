@@ -51,14 +51,15 @@ export const TrendingCard = ({ index, title, userId, tag, postId }: Props) => {
           </div>
         </div>
         <div className="flex h-full flex-col justify-between">
-          <figure className="flex max-h-[46px] max-w-[46px] items-center overflow-hidden rounded-full border-[3px] border-gel-black text-black">
+          <figure className="flex max-h-[46px] max-w-[46px] items-center overflow-hidden rounded-full border-[3px] border-gel-black text-black min-h-[40px] min-w-[40px]">
             {isLoading ? (
               <Spinner size="40" />
             ) : (
               <picture>
                 <source
-                  type="image/webp"
                   sizes="40px"
+                  type="image/webp"
+                  className="min-h-[40px] min-w-[40px]"
                   srcSet={`${getUserData?.userImg} 40w`}
                 />
                 <img
@@ -75,7 +76,7 @@ export const TrendingCard = ({ index, title, userId, tag, postId }: Props) => {
             )}
           </figure>
           <div>
-            <div className="flex gap-1 text-4xl mb-2">
+            <div className="flex gap-1 text-2xl mb-2">
               <p className="text-gel-primary">{title}</p>
             </div>
             <div

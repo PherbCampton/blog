@@ -24,10 +24,11 @@ export const useFetch = (collectionName: string) => {
         );
         rawData.sort((a, b) => {
           return (
+            // @ts-ignore
             new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
           );
         });
-        setData(rawData);
+        setData(rawData as unknown as Profile[] | PostType[]);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);

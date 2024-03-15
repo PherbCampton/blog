@@ -1,12 +1,13 @@
-import { signOut } from "firebase/auth";
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase/firebase";
 import { toast } from "react-toastify";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase/firebase";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   children: React.ReactNode;
 };
+
 export const SignOut = ({ children }: Props) => {
   const navigate = useNavigate();
 
@@ -19,12 +20,13 @@ export const SignOut = ({ children }: Props) => {
         toast.error((error as Error).message);
       });
   };
+
   return (
     <div
       tabIndex={-1}
       role="menuitem"
-      className="group-hover/parent:flex"
       onClick={handleLogout}
+      className="group-hover/parent:flex"
     >
       <span
         className={`group relative flex w-full cursor-pointer items-center rounded-lg py-2 text-lg text-gel-primary lg:items-start lg:px-2 lg:text-sm lg:text-gel-primary hover:lg:bg-[rgba(242,38,23,0.51)]

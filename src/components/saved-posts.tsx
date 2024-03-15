@@ -37,7 +37,7 @@ export const SavedPosts = ({ getUserData }: Props) => {
           )}
         </div>
       ) : (
-        <div className="opacity-50 hover:opacity-100 cursor-pointer">
+        <div>
           <p className="text-center text-gel-gray">
             {currentUser?.uid === getUserData?.userId
               ? "You"

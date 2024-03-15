@@ -7,19 +7,22 @@ import { IoTrashBin } from "react-icons/io5";
 import { tags, profileColors } from "../data";
 import { db, storage } from "../firebase/firebase";
 import { doc, updateDoc } from "firebase/firestore";
-import defaultAvatar from "../assets/profile-placeholder.jpg";
 import SingleSelect, { OptionType } from "./single-select";
+import defaultAvatar from "../assets/profile-placeholder.jpg";
 import { FormEvent, useEffect, useState, useRef } from "react";
 import MultiSelect, { MultiSelectProps } from "./multi-select";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 export type Profile = {
+  x: string;
   bio: string;
   email: string;
   savedAt?: number;
   tag?: OptionType;
+  linkedin: string;
   username: string;
   theme: OptionType;
+  instagram: string;
   userImg: string | File;
   id?: string | undefined;
   userId?: string | undefined;
@@ -37,10 +40,13 @@ export const ProfileTab = ({ handleProfileTheme, getUserData }: Props) => {
       setForm(getUserData);
     } else {
       setForm({
+        x: "",
         bio: "",
         email: "",
         userImg: "",
         username: "",
+        linkedin: "",
+        instagram: "",
         interests: [],
         theme: { value: "#fffff", label: "Default" },
       });
@@ -56,10 +62,13 @@ export const ProfileTab = ({ handleProfileTheme, getUserData }: Props) => {
   });
 
   const [form, setForm] = useState<Profile>({
+    x: "",
     bio: "",
     email: "",
     userImg: "",
     username: "",
+    linkedin: "",
+    instagram: "",
     interests: [],
     theme: { value: "#fffff", label: "Default" },
   });
@@ -114,12 +123,15 @@ export const ProfileTab = ({ handleProfileTheme, getUserData }: Props) => {
     try {
       const docRef = doc(db, "users", getUserData?.userId as string);
       await updateDoc(docRef, {
+        x: form.x,
         bio: form.bio,
         userImg: imageUrl,
         email: form.email,
         theme: form.theme,
+        linkedin: form.linkedin,
         username: form.username,
         interests: form.interests,
+        instagram: form.instagram,
       });
       setIsLoading(false);
       toast.success("Profile updated successful");
@@ -193,9 +205,9 @@ export const ProfileTab = ({ handleProfileTheme, getUserData }: Props) => {
         </label>
       </div>
       <Input
-        name="username"
         type="text"
         label="Name"
+        name="username"
         setForm={setForm}
         value={form.username}
       />
@@ -213,7 +225,13 @@ export const ProfileTab = ({ handleProfileTheme, getUserData }: Props) => {
         selectedOptions={form.interests}
         onChange={handleMultiSelectChange}
       />
-      <Textarea name="bio" label="Bio" value={form.bio} setForm={setForm} />
+      <Textarea
+        name="bio"
+        label="Bio"
+        value={form.bio}
+        setForm={setForm}
+        placeholder="We would love to know you..."
+      />
       <SingleSelect
         label="Theme"
         options={profileColors}
@@ -221,6 +239,37 @@ export const ProfileTab = ({ handleProfileTheme, getUserData }: Props) => {
         onChange={handleSingleSelectChange}
         help="Select your profile accent color"
       />
+
+      <fieldset className="flex flex-col gap-4">
+        <legend className="ml-2 mb-4 block text-md opacity-50 font-semibold">
+          Social Links
+        </legend>
+        <Input
+          type="text"
+          name="linkedin"
+          label="Linkedin"
+          setForm={setForm}
+          value={form.linkedin}
+          placeholder="Linkedin profile link"
+        />
+        <Input
+          type="text"
+          name="instagram"
+          label="Instagram"
+          setForm={setForm}
+          value={form.instagram}
+          placeholder="Instagram profile link"
+        />
+        <Input
+          name="x"
+          label="X"
+          type="text"
+          value={form.x}
+          setForm={setForm}
+          placeholder="X profile link"
+        />
+      </fieldset>
+
       <div className="my-6 flex flex-col items-center gap-8 lg:flex-row">
         <PrimaryBtn type="submit" loading={isLoading} text="Update Profile" />
       </div>

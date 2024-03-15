@@ -2,68 +2,75 @@ import { PostType } from "../tag-card";
 import { toast } from "react-toastify";
 import { db } from "../../firebase/firebase";
 import { useUser } from "../../providers/user";
-import { useEffect, useState } from "react";
-import { BsSave2, BsSave2Fill } from "react-icons/bs";
-import { useSingleFetch } from "../../hooks/useSingleFetch";
-import { deleteDoc, doc, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 
 type Props = {
   post: PostType;
 };
 
 export const Delete = ({ post }: Props) => {
-  const [isSaved, setIsSaved] = useState(true);
-  const { currentUser, userLoading } = useUser();
-  const { id, userId } = post;
+  const { id: postId } = post;
+  const { allUsers } = useUser();
 
-  const { data, isLoading, refetch } = useSingleFetch(
-    "users",
-    currentUser.uid,
-    "savedPost"
-  );
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (data) {
-      setIsSaved(data && data.find((item) => item.id === id));
-    }
-  }, [data, id]);
-
-  const handleSave = async () => {
+  const handleDelete = async () => {
     try {
-      if (currentUser) {
-        const saveRef = doc(db, "users", currentUser?.uid, "savedPost", id);
+      const delRef = doc(db, "posts", postId as string);
 
-        if (isSaved) {
-          await deleteDoc(saveRef);
-          toast.success("Post unsaved");
-        } else {
-          await setDoc(saveRef, {
-            ...post,
-            savedAt: Date.now(),
-          });
-          toast.success("Post saved");
-        }
-        setIsSaved(!isSaved);
-        refetch();
-      }
+      allUsers.forEach(async (user) => {
+        const savedRef = doc(
+          db,
+          "users",
+          user?.id as string,
+          "savedPost",
+          postId
+        );
+
+        const savesRef = doc(
+          db,
+          "posts",
+          postId as string,
+          "saves",
+          user?.id as string
+        );
+
+        const likeRef = doc(
+          db,
+          "posts",
+          postId as string,
+          "likes",
+          user?.id as string
+        );
+
+        await deleteDoc(savedRef);
+        await deleteDoc(likeRef);
+        await deleteDoc(savesRef);
+      });
+
+      const commentsRef = collection(db, "posts", postId as string, "comments");
+      const querySnapshot = await getDocs(commentsRef);
+      querySnapshot.forEach(async (commentDoc) => {
+        await deleteDoc(commentDoc.ref);
+      });
+
+      await deleteDoc(delRef);
+
+      toast.success("Post deleted");
+      navigate("/feeds");
     } catch (error) {
-      toast.error(error.message as Error);
+      toast.error((error as Error).message);
     }
   };
 
   return (
-    <div className="flex gap-1.5 items-center" onClick={handleSave}>
-      {isSaved ? (
-        <BsSave2Fill
-          size={16}
-          className=" opacity-50 hover:opacity-100 cursor-pointer"
-        />
-      ) : (
-        <BsSave2
-          size={16}
-          className=" opacity-50 hover:opacity-100 cursor-pointer"
-        />
-      )}
+    <div className="flex gap-1.5 items-center" onClick={handleDelete}>
+      <MdOutlineDeleteOutline
+        size={20}
+        className=" opacity-70  cursor-pointer hover:fill-[red]"
+      />
     </div>
   );
 };

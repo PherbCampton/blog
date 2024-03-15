@@ -75,22 +75,20 @@
 }
 
 .w-md-preview img {
-  @apply max-w-full rounded-3xl mb-8;
+  @apply max-w-full rounded-3xl my-8;
 }
 
 .w-md-preview code,
 .w-md-preview pre {
-  @apply rounded-xl;
+  @apply rounded-xl h-auto text-wrap;
 }
 
 .w-md-preview code {
-  @apply text-sm;
-  @apply p-1;
+  @apply text-sm p-1;
 }
 
 .w-md-preview pre {
-  @apply p-4 bg-primaryBackground;
-  @apply my-4;
+  @apply my-4 p-4 bg-primaryBackground;
 }
 
 .outline-list li {

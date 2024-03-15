@@ -11,6 +11,7 @@ type Props = {
   value: string;
   label: string;
   disabled?: boolean;
+  placeholder?: string;
   setForm:
     | Dispatch<SetStateAction<Profile>>
     | Dispatch<SetStateAction<PostForm>>
@@ -25,6 +26,7 @@ export const Input = ({
   value,
   label,
   setForm,
+  placeholder,
   disabled = false,
 }: Props) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,6 +50,7 @@ export const Input = ({
           value={value}
           disabled={disabled}
           onChange={handleChange}
+          placeholder={placeholder}
           className={`border-gel-background border px-6 py-4 ${
             disabled ? "text-gel-gray cursor-not-allowed" : ""
           }`}

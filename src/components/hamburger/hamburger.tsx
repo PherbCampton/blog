@@ -1,11 +1,34 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import "./hamburger.css";
 
-const Hamburger: React.FC = () => {
+type Props = {
+  nav?: boolean;
+  setNav?: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const Hamburger = ({ nav, setNav }: Props) => {
+  const [prevNav, setPrevNav] = useState<boolean>(true);
+
+  useEffect(() => {
+    setPrevNav(nav || false);
+  }, [nav]);
+
+  const handleClick: React.ChangeEventHandler<HTMLInputElement> = () => {
+    if (setNav) {
+      setPrevNav(nav || false);
+      setNav(!prevNav);
+      if (!prevNav) {
+        document.body.classList.add("no-scroll");
+      } else {
+        document.body.classList.remove("no-scroll");
+      }
+    }
+  };
+
   return (
-    <div className="p-[20px]">
+    <div className="z-100">
       <label className="hamburger">
-        <input type="checkbox" />
+        <input type="checkbox" onChange={handleClick} checked={nav} />
         <svg viewBox="0 0 32 32">
           <path
             className="line line-top-bottom"
